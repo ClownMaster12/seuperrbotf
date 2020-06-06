@@ -279,14 +279,27 @@ async def bug(ctx, *, something):
       msg = await ctx.send(embed = embed)
         
 
-
+@commands.has_permissions(manage_roles=True)
 @client.command()
 async def roles(ctx: commands.Context):
+    try:
         roles = [f'{role.name}: {len(role.members)}' for role in sorted(await ctx.guild.fetch_roles(), reverse=True) if
                  role.name != '@everyone']
         embed=discord.Embed(description='\n'.join(roles), color=0x2f3136)
         embed.set_footer(text=f"{len(ctx.guild.roles)} in total")
         await ctx.send(embed=embed)
+    except:
+        embed=discord.Embed(description='The roles command had a error.', color=0x2f3136)
+        await ctx.send(embed=embed)
+@roles.error
+async def roles_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `manage_messages` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
 
         
         

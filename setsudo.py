@@ -279,15 +279,19 @@ async def bug(ctx, *, something):
       msg = await ctx.send(embed = embed)
         
 
-import emoji
 
 @client.command()
 async def roles(ctx: commands.Context):
+    try:
         roles = [f'{role.name}: {len(role.members)}' for role in sorted(await ctx.guild.fetch_roles(), reverse=True) if
                  role.name != '@everyone']
         embed=discord.Embed(description='\n'.join(roles), color=0x2f3136)
         embed.set_footer(text=f"{len(ctx.guild.roles)} in total")
         await ctx.send(embed=embed)
+    except:
+        embed=discord.Embed(description="There was a error with the roles command.", color=0x2f3136)
+        await ctx.send(embed=embed)
+        
         
 
 
@@ -1353,6 +1357,7 @@ async def useful(ctx):
     embed.add_field(name="Uptime", value=f"Shows the bot uptime.", inline=False)
     embed.add_field(name="Stats", value=f"Show information about the bot.", inline=False)
     embed.add_field(name="Setprefix", value=f"Changes the bots prefix.", inline=False)
+    embed.add_field(name="Roles", value=f"Shows a list of roles on the server.", inline=False)
     embed.add_field(name="Password", value=f"Generates a random password.", inline=False)
     await ctx.send(embed=embed)
 

@@ -261,20 +261,6 @@ async def ban_error(ctx, error):
         await msg.add_reaction("❌")
 
 
-@commands.is_owner()
-@client.command()
-async def push(ctx):
-    embed = discord.Embed(
-       title='Pushing changes to github..', description='', colour=random.randint(0, 0xFFFFFF))
-
-    m = await ctx.send(embed=embed)
-    os.system("git push")
-    time.sleep(0)
-    embed = discord.Embed(
-       title='Pushed changes to github', description='', colour=random.randint(0, 0xFFFFFF))
-
-    await m.edit(embed=embed)
-
     
 @commands.is_owner()
 @client.command()
@@ -289,6 +275,16 @@ async def pull(ctx):
        title='Pulled from github', description='', colour=random.randint(0, 0xFFFFFF))
 
     await m.edit(embed=embed)
+@pull.error
+async def pull_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+          title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
+
 
 
 @commands.is_owner()
@@ -330,13 +326,23 @@ async def fix(ctx):
        title='`Pull` command is fixed', description='', colour=random.randint(0, 0xFFFFFF))
 
     await m.edit(embed=embed)
+@fix.error
+async def fix_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+          title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
 
 
 
 
 
 
-@commands.is_owner()
+
+
 @client.command()
 async def dev(ctx):
   """Shows this message."""
@@ -349,15 +355,7 @@ async def dev(ctx):
   embed.add_field(name="Reload", value=f"Reloads all commands.", inline=False)
   embed.add_field(name="Eval", value=f"Evaluates code.", inline=False)
   await ctx.send(embed=embed)
-@dev.error
-async def dev_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        embed = discord.Embed(
-        title='No go away', description='Owner only' , colour=discord.Colour.red())
 
-
-        msg = await ctx.send(embed = embed)
-        await msg.add_reaction("❌")
 
 
 

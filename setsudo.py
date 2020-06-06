@@ -9,6 +9,7 @@ import psutil
 
 import time
 
+import secrets
 import sys, traceback
 
 import sys, traceback
@@ -42,26 +43,96 @@ import os
 from discord import Game
 import discord
 from discord.ext import commands
-import logging
 import praw
 import platform
 from discord.ext.commands import CommandNotFound
 import subprocess
 
+messages = joined = 0
+
+async def update_stats():
+    await client.wait_until_ready()
+    global messages, joined
+
+    while not client.is_closed():
+        try:
+            with open("stats.txt", "a") as f:
+                f.write(f"Time: {int(time.time())}, Messages: {messages}, Members Joined: {joined}\n")
+
+            messages = 0
+            joined = 0
+ 
+            await asyncio.sleep(600)
+
+        except Exception as e:
+            print(e)
+            await asyncio.sleep(600)
+    
+
+
 def get_prefix(client, message):
     with open("prefixes.json", "r") as f:
         prefixes = json.load(f)
-
-
+    
+    
+   
     return prefixes[str(message.guild.id)]
 
 client=discord.AutoShardedClient()
 
-client = commands.Bot(command_prefix= get_prefix)
+client = commands.Bot(command_prefix=get_prefix, case_insensitive=True)
 client.remove_command('help')
 
 
+<<<<<<< HEAD
+=======
 
+@client.event
+async def on_member_join(member):
+    global joined
+    joined += 1
+>>>>>>> parent of 9e0a8c4... Update setsudo.py
+
+@client.event
+async def on_message(message):
+    global messages
+    messages += 1
+
+    await client.process_commands(message)
+
+
+@commands.has_permissions(manage_messages=True)
+@client.command(pass_context=True)
+async def warn(ctx, member: discord.Member, *, note : str = None):
+  try:
+    if not member:
+            embed=discord.Embed(title=f"Specify a member inside the server to warn", color=0x2f3136)
+            await ctx.send(embed=embed)
+    else:
+      embed=discord.Embed(title="You have recieved a warning.", description="You were warned in **{0}** by **{1}**. Moderator note is `{2}`.".format(ctx.message.guild.name, ctx.message.author, note), color=0x176cd5)
+      embed.set_thumbnail(url="https://images.emojiterra.com/twitter/512px/26a0.png")
+      await member.send(embed=embed)
+      embed=discord.Embed(title="Warning issued", color=0x176cd5)
+      await ctx.send(embed=embed)
+  except:
+      embed=discord.Embed(title=f"There was a error with the `warn` command.", color=0x2f3136)
+      await ctx.send(embed=embed)
+
+@warn.error
+async def warn_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `manage_messages` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
+
+
+
+@client.command()
+async def echo(ctx, *, text="Please include text."):
+        await ctx.send(text.replace("@", "@ "))
 
 @client.event
 async def on_command_error(ctx, error):
@@ -92,40 +163,175 @@ async def on_guild_remove(guild):
     with open("prefixes.json", "w") as f:
         json.dump(prefixes, f, indent=4)
 
+@commands.has_permissions(manage_messages=True)
 @client.command(aliases=["setprefix"])
-async def changeprefix(ctx, prefix):
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-
-
-    prefixes[str(ctx.guild.id)] = prefix
-
-    with open("prefixes.json", "w") as f:
-        json.dump(prefixes, f, indent=4)
+async def changeprefix(ctx, *, prefix):
     try:
         embed = discord.Embed(
         title=f'Prefix was changed to `{prefix}` successfully.', description='' , colour=0x2f3136)
 
         msg = await ctx.send(embed = embed)
+        with open("prefixes.json", "r") as f:
+            prefixes = json.load(f)
+
+
+        prefixes[str(ctx.guild.id)] = prefix
+
+        with open("prefixes.json", "w") as f:
+            json.dump(prefixes, f, indent=4)
     except:
         embed = discord.Embed(
         title=f'There was a error changing the prefix. ', description='' , colour=0x2f3136)
 
         msg = await ctx.send(embed = embed)
+@changeprefix.error
+async def changeprefix_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `manage_messages` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
+    
 
 
 
 
 
+@commands.has_permissions(manage_messages=True)
+@client.command()
+async def purge(ctx, amount=1000):
+    m = await ctx.channel.purge(limit=amount+1)
+    time.sleep(3)
+    embed = discord.Embed(
+        title=f":wastebasket: Successfully purged `{amount}` messages from the channel `{ctx.channel.name}`", description='' , colour=0x2f3136)
+
+    m = await ctx.send(embed = embed)
+    time.sleep(5)
+    await m.delete()
+@purge.error
+async def purge_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `manage_messages` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
+
+
+@client.command()
+async def mutebroken(ctx):
+    embed = discord.Embed(
+        title='', description=f'1 | **Are you sure there is a role called `muted`.**\n2 | **{client.user.name} might not have permission to add roles to members.**\n3 | **The mute role might be higher than the bots roles, causing the bot to not be able to add the role.**' , colour=discord.Colour.red())
+
+    embed.set_footer(text="If this didn't work you can type '-bug [text]' to report a bug.")
+    msg = await ctx.send(embed = embed)
 
 
 
 
+@client.command()
+async def bug(ctx, *, something):
+  try:
+    channel = client.get_channel(718531451876016209)
+    embed = discord.Embed(
+    title='Bug Report', description=f'Sent by `{ctx.author.name}#{ctx.author.discriminator}` on the server `{ctx.guild.name}`' , colour=discord.Colour.blue())
+
+    
+    embed.add_field(name='Message', value=f'`{something}`', inline=False)
+
+
+    await channel.send(embed = embed)
+    embed = discord.Embed(
+    title='Bug Report Sent', description=f'' , colour=discord.Colour.blue())
+
+    
+    embed.add_field(name='Message', value=f'`{something}`', inline=False)
+
+
+    await ctx.send(embed = embed)
+  except: 
+      embed = discord.Embed(
+        title='', description=f'There was a error with the bug command. Did you include text?' , colour=discord.Colour.red())
+
+
+      msg = await ctx.send(embed = embed)
+        
 
 
 
 
+@client.command()
+@commands.has_permissions(manage_messages=True)
+async def mute(ctx, member: discord.Member=None):
+  try:  
+    if not member:
+        embed = discord.Embed(
+        title='', description='Please specify a member to mute.' , colour=discord.Colour.red())
 
+
+        msg = await ctx.send(embed = embed)
+        return
+    role = discord.utils.get(ctx.guild.roles, name="Muted")
+    await member.add_roles(role)
+    embed = discord.Embed(
+    title='', description=f'{member.mention} has been muted.' , colour=discord.Colour.green())
+
+
+    msg = await ctx.send(embed = embed)
+  except:
+      embed = discord.Embed(
+        title='', description=f'There was a error with the `mute` command. Please type `{ctx.prefix}mutebroken` on ways to fix this.' , colour=discord.Colour.red())
+
+
+      msg = await ctx.send(embed = embed)
+@mute.error
+async def mute_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `manage_messages` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
+
+
+@client.command()
+@commands.has_permissions(manage_messages=True)
+async def unmute(ctx, member: discord.Member=None):
+  try:  
+    if not member:
+        embed = discord.Embed(
+          title='', description='Please specify a member to mute.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        return
+    role = discord.utils.get(ctx.guild.roles, name="Muted")
+    await member.remove_roles(role)
+    embed = discord.Embed(
+        title='', description=f'{member.mention} has been unmuted.' , colour=discord.Colour.green())
+
+
+    msg = await ctx.send(embed = embed)
+  except:
+      embed = discord.Embed(
+        title='', description=f'Maybe the member was already muted. But the `unmute` command had a error.' , colour=discord.Colour.red())
+
+
+      msg = await ctx.send(embed = embed)
+
+@unmute.error
+async def unmute_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `manage_messages` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
 
 
 
@@ -173,6 +379,7 @@ async def changeprefix(ctx, prefix):
 async def on_ready():
     print("Bot is online!")
     print(f"Logged in as {client.user.name} ({client.user.id})")
+    await client.change_presence(activity=discord.Game(name=f"with my prefix '-' | -help"), status=discord.Status.idle)
 
 start_time = datetime.datetime.utcnow() # Timestamp of when it came online
 
@@ -208,9 +415,29 @@ async def banner(ctx):
     m = await ctx.send(embed=embed)
 
 
+@client.command(aliases=["pass"])
+async def password(ctx, nbytes: int = 18):
+    try:
+        if nbytes not in range(3, 1401):
+            embed = discord.Embed(title="Error!", description="I only accept any numbers between `3-1400`", color=0x2f3136)
+            return await ctx.send(embed=embed)
+        if hasattr(ctx, 'guild') and ctx.guild is not None:
+            embed = discord.Embed(title="", description=f"I've randomly generated a password and sent it to your private messages, {ctx.author.mention}", color=0x2f3136)
+            await ctx.send(embed=embed)
+            embed = discord.Embed(title="Here is your password:", description=f"{secrets.token_urlsafe(nbytes)}", color=0x2f3136)
+            await ctx.author.send(embed=embed)
+        else:
+            embed = discord.Embed(title="Error!", description="Thats not a number?", color=0x2f3136)
+            await ctx.send(embed=embed)
+    except:
+        embed = discord.Embed(title="Error!", description="It seems your private messages are disabled.", color=0x2f3136)
+        await ctx.send(embed=embed)
+
+
+
 
 @client.command()
-@commands.has_permissions(administrator=True)
+@commands.has_permissions(kick_members=True)
 async def kick(ctx, member:discord.Member = None):
     try:
         if not member:
@@ -261,6 +488,11 @@ async def ban_error(ctx, error):
         await msg.add_reaction("❌")
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> parent of 9e0a8c4... Update setsudo.py
     
 @commands.is_owner()
 @client.command()
@@ -279,19 +511,30 @@ async def pull(ctx):
 async def pull_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
         embed = discord.Embed(
+<<<<<<< HEAD
           title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
+=======
+        title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
+>>>>>>> parent of 9e0a8c4... Update setsudo.py
 
 
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 9e0a8c4... Update setsudo.py
 
 
 @commands.is_owner()
 @client.command(pass_context=True, aliases=["r"])
 async def reload(ctx):
         embed = discord.Embed(
+<<<<<<< HEAD
            title='Reloading commands', description='This can take 6 seconds or more', colour=random.randint(0, 0xFFFFFF))
+=======
+           title='Reloading commands', description='This can take 6 seconds or more, please wait.', colour=random.randint(0, 0xFFFFFF))
+>>>>>>> parent of 9e0a8c4... Update setsudo.py
   
         m = await ctx.send(embed=embed)
         os.system("python run.py")
@@ -306,7 +549,10 @@ async def reload_error(ctx, error):
 
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")  
+<<<<<<< HEAD
   
+=======
+>>>>>>> parent of 9e0a8c4... Update setsudo.py
 
 
 
@@ -330,13 +576,20 @@ async def fix(ctx):
 async def fix_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
         embed = discord.Embed(
+<<<<<<< HEAD
           title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
+=======
+        title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
+>>>>>>> parent of 9e0a8c4... Update setsudo.py
 
 
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> parent of 9e0a8c4... Update setsudo.py
 
 
 
@@ -384,12 +637,13 @@ async def botstatus(ctx):
 @client.command()
 async def useful(ctx):
     embed = discord.Embed(
-    title=f'Moderation Commands', description=f'', colour=0xcccccc)
+    title=f'Useful Commands', description=f'', colour=0xcccccc)
 
     embed.add_field(name="Ping", value=f"Shows the bot latency.", inline=False)
     embed.add_field(name="Uptime", value=f"Shows the bot uptime.", inline=False)
     embed.add_field(name="Stats", value=f"Show information about the bot.", inline=False)
-    embed.add_field(name="Setprefix", value=f"Changes the bots prefix", inline=False)
+    embed.add_field(name="Setprefix", value=f"Changes the bots prefix.", inline=False)
+    embed.add_field(name="Password", value=f"Generates a random password.", inline=False)
     await ctx.send(embed=embed)
 
 @client.command()
@@ -397,8 +651,12 @@ async def moderation(ctx):
     embed = discord.Embed(
     title=f'Moderation Commands', description=f'', colour=0xcccccc)
 
-    embed.add_field(name="Ban", value=f"Bans a specified member", inline=False)
-    embed.add_field(name="Kick", value=f"Kicks a specified member", inline=False)
+    embed.add_field(name="Ban", value=f"Bans a specified member.", inline=False)
+    embed.add_field(name="Kick", value=f"Kicks a specified member.", inline=False)
+    embed.add_field(name="Purge", value=f"Purges the chat.", inline=False)
+    embed.add_field(name="Warn", value=f"Warns a specified member.", inline=False)
+    embed.add_field(name="Mute", value=f"Mutes a specified member.", inline=False)
+    embed.add_field(name="Unmute", value=f"Unmutes a specified member.", inline=False)
     await ctx.send(embed=embed)
 
 
@@ -423,7 +681,7 @@ async def ping(ctx):
 
 @commands.is_owner()
 @client.command(pass_context=True, name='eval')
-async def _eval(ctx, *, code):
+async def _eval(ctx, *, code="You need to input code."):
   if ctx.author.id == 286591003794604034:
     global_vars = globals().copy()
     global_vars['bot'] = client
@@ -459,5 +717,5 @@ async def _eval_error(ctx, error):
         await msg.add_reaction("❌")
 
 
-
+client.loop.create_task(update_stats())
 client.run(env.TOKEN)

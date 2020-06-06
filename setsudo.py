@@ -84,8 +84,7 @@ client = commands.Bot(command_prefix=get_prefix, case_insensitive=True)
 client.remove_command('help')
 
 
-<<<<<<< HEAD
-=======
+
 
 @client.event
 async def on_member_join(member):
@@ -488,8 +487,6 @@ async def ban_error(ctx, error):
         await msg.add_reaction("❌")
 
 
-<<<<<<< HEAD
-=======
 
 
 >>>>>>> parent of 9e0a8c4... Update setsudo.py
@@ -511,30 +508,21 @@ async def pull(ctx):
 async def pull_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
         embed = discord.Embed(
-<<<<<<< HEAD
           title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
-=======
-        title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
->>>>>>> parent of 9e0a8c4... Update setsudo.py
+
 
 
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
-<<<<<<< HEAD
 
-=======
->>>>>>> parent of 9e0a8c4... Update setsudo.py
+
 
 
 @commands.is_owner()
 @client.command(pass_context=True, aliases=["r"])
 async def reload(ctx):
         embed = discord.Embed(
-<<<<<<< HEAD
            title='Reloading commands', description='This can take 6 seconds or more', colour=random.randint(0, 0xFFFFFF))
-=======
-           title='Reloading commands', description='This can take 6 seconds or more, please wait.', colour=random.randint(0, 0xFFFFFF))
->>>>>>> parent of 9e0a8c4... Update setsudo.py
   
         m = await ctx.send(embed=embed)
         os.system("python run.py")
@@ -549,10 +537,7 @@ async def reload_error(ctx, error):
 
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")  
-<<<<<<< HEAD
-  
-=======
->>>>>>> parent of 9e0a8c4... Update setsudo.py
+
 
 
 
@@ -576,20 +561,11 @@ async def fix(ctx):
 async def fix_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
         embed = discord.Embed(
-<<<<<<< HEAD
           title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
-=======
-        title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
->>>>>>> parent of 9e0a8c4... Update setsudo.py
-
 
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
-<<<<<<< HEAD
 
-
-=======
->>>>>>> parent of 9e0a8c4... Update setsudo.py
 
 
 

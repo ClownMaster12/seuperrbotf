@@ -351,7 +351,6 @@ async def dev(ctx):
 
   embed.add_field(name="Fix", value=f"Fixes the `Pull` command.", inline=False)
   embed.add_field(name="Pull", value=f"Pulls changes from github.", inline=False)
-  embed.add_field(name="Push", value=f"Pushes changes to github.", inline=False)
   embed.add_field(name="Reload", value=f"Reloads all commands.", inline=False)
   embed.add_field(name="Eval", value=f"Evaluates code.", inline=False)
   await ctx.send(embed=embed)

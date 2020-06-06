@@ -90,7 +90,7 @@ client.remove_command('help')
 async def on_member_join(member):
     global joined
     joined += 1
->>>>>>> parent of 9e0a8c4... Update setsudo.py
+
 
 @client.event
 async def on_message(message):
@@ -488,8 +488,6 @@ async def ban_error(ctx, error):
 
 
 
-
->>>>>>> parent of 9e0a8c4... Update setsudo.py
     
 @commands.is_owner()
 @client.command()

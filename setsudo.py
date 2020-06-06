@@ -391,11 +391,8 @@ async def on_guild_remove(guild:discord.Guild):
   embed.set_thumbnail(url=guild.icon_url)
   embed.timestamp = datetime.datetime.utcnow()
 
-  embed2 = discord.Embed(
-        title=f"We now have {len(client.guilds)}", description=f"", colour=discord.Colour.red())
 
   await channel.send(embed=embed)
-  await channel.send(embed=embed2)
   
 @client.event
 async def on_guild_join(guild:discord.Guild):
@@ -409,11 +406,9 @@ async def on_guild_join(guild:discord.Guild):
   embed.timestamp = datetime.datetime.utcnow()
 
 
-  embed2 = discord.Embed(
-        title=f"We now have {len(client.guilds)}", description=f"", colour=discord.Colour.red())
 
   await channel.send(embed=embed)
-  await channel.send(embed=embed2)
+
 
 
 

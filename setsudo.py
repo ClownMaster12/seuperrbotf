@@ -279,7 +279,16 @@ async def bug(ctx, *, something):
       msg = await ctx.send(embed = embed)
         
 
+import emoji
 
+@client.command()
+async def roles(ctx: commands.Context):
+        roles = [f'{role.name}: {len(role.members)}' for role in sorted(await ctx.guild.fetch_roles(), reverse=True) if
+                 role.name != '@everyone']
+        embed=discord.Embed(description='\n'.join(roles), color=0x2f3136)
+        embed.set_footer(text=f"{len(ctx.guild.roles)} in total")
+        await ctx.send(embed=embed)
+        
 
 
 @client.command()

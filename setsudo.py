@@ -292,19 +292,24 @@ async def pull(ctx):
 
 
 @commands.is_owner()
-@client.command(pass_context=True)
+@client.command(pass_context=True, aliases=["r"])
 async def reload(ctx):
         embed = discord.Embed(
-           title='Reloading commands', description='', colour=random.randint(0, 0xFFFFFF))
+           title='Reloading commands', description='This can take 6 seconds or more', colour=random.randint(0, 0xFFFFFF))
   
         m = await ctx.send(embed=embed)
-        embed = discord.Embed(
-            title='Reloaded commands', description='', colour=random.randint(0, 0xFFFFFF))
-
-        await m.edit(embed=embed)
         os.system("python run.py")
     
         time.sleep(0.2) # 200ms to CTR+C twice
+@reload.error
+async def reload_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")  
   
 
 

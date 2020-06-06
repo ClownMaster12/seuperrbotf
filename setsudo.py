@@ -509,13 +509,9 @@ async def pull_error(ctx, error):
 @client.command(pass_context=True, aliases=["r"])
 async def reload(ctx):
         embed = discord.Embed(
-           title='Reloading commands', description='', colour=random.randint(0, 0xFFFFFF))
+           title='Reloading commands', description='This can take 6 seconds or more.', colour=random.randint(0, 0xFFFFFF))
   
         m = await ctx.send(embed=embed)
-        embed = discord.Embed(
-            title='Reloaded commands', description='', colour=random.randint(0, 0xFFFFFF))
-
-        await m.edit(embed=embed)
         os.system("python run.py")
     
         time.sleep(0.2) # 200ms to CTR+C twice

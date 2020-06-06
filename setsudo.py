@@ -1084,6 +1084,15 @@ async def unban(ctx, name_or_id):
             return await ctx.send('No user found.')
         await ctx.guild.unban(ban.user)
         await ctx.send(f'`{ban.user}` has been unbanned from `{ctx.guild.name}`')
+@unban.error
+async def unban_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `ban_members` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
 
 
 

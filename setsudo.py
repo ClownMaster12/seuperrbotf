@@ -45,6 +45,8 @@ from discord.ext import commands
 import logging
 import praw
 import platform
+from discord.ext.commands import CommandNotFound
+import subprocess
 
 def get_prefix(client, message):
     with open("prefixes.json", "r") as f:
@@ -59,13 +61,13 @@ client = commands.Bot(command_prefix= get_prefix)
 client.remove_command('help')
 
 
-@client.command()
-async def logs(ctx):
-    test = logging.basicConfig(level=logging.INFO)#
-    await ctx.send(test)
 
 
-
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        return
+    raise error 
 
 
 @client.event

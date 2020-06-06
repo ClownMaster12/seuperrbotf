@@ -478,28 +478,7 @@ async def ban_error(ctx, error):
         await msg.add_reaction("❌")
 
 
-@commands.is_owner()
-@client.command()
-async def push(ctx):
-    embed = discord.Embed(
-       title='Pushing changes to github..', description='', colour=random.randint(0, 0xFFFFFF))
 
-    m = await ctx.send(embed=embed)
-    os.system("git push")
-    time.sleep(0)
-    embed = discord.Embed(
-       title='Pushed changes to github', description='', colour=random.randint(0, 0xFFFFFF))
-
-    await m.edit(embed=embed)
-@push.error
-async def push_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        embed = discord.Embed(
-        title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
-
-
-        msg = await ctx.send(embed = embed)
-        await msg.add_reaction("❌")
 
     
 @commands.is_owner()
@@ -591,7 +570,6 @@ async def dev(ctx):
 
   embed.add_field(name="Fix", value=f"Fixes the `Pull` command.", inline=False)
   embed.add_field(name="Pull", value=f"Pulls changes from github.", inline=False)
-  embed.add_field(name="Push", value=f"Pushes changes to github.", inline=False)
   embed.add_field(name="Reload", value=f"Reloads all commands.", inline=False)
   embed.add_field(name="Eval", value=f"Evaluates code.", inline=False)
   await ctx.send(embed=embed)

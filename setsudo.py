@@ -1080,9 +1080,7 @@ async def unmute_error(ctx, error):
 async def unban(ctx, name_or_id):
     try:
         ban = await ctx.get_ban(name_or_id)
-        if not ban:
-            return await ctx.send('No user found.')
-        await ctx.guild.unban(ban.user)
+        await ban.unban()
         await ctx.send(f'`{ban.user}` has been unbanned from `{ctx.guild.name}`')
     except:
         await ctx.send('No user found.')

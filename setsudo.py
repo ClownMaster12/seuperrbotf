@@ -294,7 +294,6 @@ async def mute(ctx, member: discord.Member=None):
         msg = await ctx.send(embed = embed)
         return
     role = discord.utils.get(ctx.guild.roles, name="Muted")
-    role = discord.utils.get(ctx.guild.roles, name="muted")
     await member.add_roles(role)
     embed = discord.Embed(
     title='', description=f'{member.mention} has been muted.' , colour=discord.Colour.green())
@@ -330,7 +329,6 @@ async def unmute(ctx, member: discord.Member=None):
         msg = await ctx.send(embed = embed)
         return
     role = discord.utils.get(ctx.guild.roles, name="Muted")
-    role = discord.utils.get(ctx.guild.roles, name="muted")
     await member.remove_roles(role)
     embed = discord.Embed(
         title='', description=f'{member.mention} has been unmuted.' , colour=discord.Colour.green())

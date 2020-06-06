@@ -1078,12 +1078,15 @@ async def unmute_error(ctx, error):
 @client.command()
 @commands.has_permissions(ban_members=True)
 async def unban(ctx, name_or_id):
-        '''Unban a member from the guild'''
+    try:
         ban = await ctx.get_ban(name_or_id)
         if not ban:
             return await ctx.send('No user found.')
         await ctx.guild.unban(ban.user)
         await ctx.send(f'`{ban.user}` has been unbanned from `{ctx.guild.name}`')
+    except:
+        await ctx.send('No user found.')
+
 @unban.error
 async def unban_error(ctx, error):
     if isinstance(error, commands.CheckFailure):

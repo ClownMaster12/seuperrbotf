@@ -1075,25 +1075,6 @@ async def unmute_error(ctx, error):
 
 
 
-@client.command()
-@commands.has_permissions(ban_members=True)
-async def unban(ctx, name_or_id):
-    try:
-        ban = await ctx.get_ban(name_or_id)
-        await ban.unban()
-        await ctx.send(f'`{ban.user}` has been unbanned from `{ctx.guild.name}`')
-    except:
-        await ctx.send('No user found.')
-
-@unban.error
-async def unban_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        embed = discord.Embed(
-        title='Sorry.', description='You need the `ban_members` permission to use this command.' , colour=discord.Colour.red())
-
-
-        msg = await ctx.send(embed = embed)
-        await msg.add_reaction("❌")
 
 
 

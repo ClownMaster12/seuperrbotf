@@ -1110,7 +1110,10 @@ async def unmute_error(ctx, error):
 
 
 
-
+@client.command()
+async def test(ctx):
+    await ctx.send("Hey")
+    
 
 
 

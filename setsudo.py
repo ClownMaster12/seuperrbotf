@@ -88,6 +88,40 @@ async def update_stats():
             print(e)
             await asyncio.sleep(600)
 
+
+
+
+def get_prefix(client, message):
+    with open("prefixes.json", "r") as f:
+        prefixes = json.load(f)
+    
+    
+   
+    return prefixes[str(message.guild.id)]
+
+client=discord.AutoShardedClient()
+
+client = commands.Bot(command_prefix=get_prefix, case_insensitive=True)
+client.remove_command('help')
+
+
+
+
+@client.event
+async def on_member_join(member):
+    global joined
+    joined += 1
+
+
+@client.event
+async def on_message(message):
+    global messages
+    messages += 1
+
+    await client.process_commands(message)
+
+    
+    
 @client.command()
 async def ping(ctx):
     try:
@@ -120,37 +154,6 @@ async def ping(ctx):
 
   
         msg = await ctx.send(embed = embed)
-
-
-def get_prefix(client, message):
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-    
-    
-   
-    return prefixes[str(message.guild.id)]
-
-client=discord.AutoShardedClient()
-
-client = commands.Bot(command_prefix=get_prefix, case_insensitive=True)
-client.remove_command('help')
-
-
-
-
-@client.event
-async def on_member_join(member):
-    global joined
-    joined += 1
-
-
-@client.event
-async def on_message(message):
-    global messages
-    messages += 1
-
-    await client.process_commands(message)
-
 
 @commands.has_permissions(manage_messages=True)
 @client.command(pass_context=True)

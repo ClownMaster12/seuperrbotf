@@ -980,23 +980,8 @@ async def on_command_error(ctx, error):
 @client.command()
 async def ping(ctx):
     try:
-      t = time.time()
-      await ctx.trigger_typing()
-      t2 = round((time.time() - t) * 1000)
-      start = time.perf_counter()
-      embed = discord.Embed(title=f'', description=f'Pinging...', colour=0x2f3136)
-
-
-
-      message = await ctx.send(embed=embed)
-      await message.delete()
-      end = time.perf_counter()
-      duration = (end - start) * 100
-
-
-
       embed = discord.Embed(
-            title=f'', description='' , colour=0x2f3136)
+            title=f'', description='Client Ping: {len(client.latency * 1000)}' , colour=0x2f3136)
 
 
       msg = await ctx.send(embed = embed)

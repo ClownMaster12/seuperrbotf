@@ -153,11 +153,6 @@ async def warn_error(ctx, error):
 async def echo(ctx, *, text="Please include text."):
         await ctx.send(text.replace("@", "@ "))
 
-@client.event
-async def on_command_error(ctx, error):
-    if isinstance(error, CommandNotFound):
-        return
-    raise error 
 
 
 @client.event

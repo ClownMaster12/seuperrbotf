@@ -685,7 +685,7 @@ async def useful(ctx):
     embed = discord.Embed(
     title=f'Useful Commands', description=f'', colour=0xcccccc)
 
-    embed.add_field(name="Ping", value=f"Shows the bot latency.", inline=False)
+    embed.add_field(name="#", value=f"Shows the bot latency.", inline=False)
     embed.add_field(name="Uptime", value=f"Shows the bot uptime.", inline=False)
     embed.add_field(name="Stats", value=f"Show information about the bot.", inline=False)
     embed.add_field(name="Setprefix", value=f"Changes the bots prefix.", inline=False)
@@ -1110,9 +1110,6 @@ async def unmute_error(ctx, error):
 
 
 
-@client.command()
-async def test(ctx):
-    await ctx.send("Hey")
     
 
 
@@ -1122,38 +1119,7 @@ async def test(ctx):
 
 
 
-@client.command()
-async def ping(ctx):
-    try:
-      t = time.time()
-      await ctx.trigger_typing()
-      t2 = round((time.time() - t) * 1000)
-      start = time.perf_counter()
-      embed = discord.Embed(title=f'', description=f'Pinging...', colour=0x2f3136)
 
-
-
-      message = await ctx.send(embed=embed)
-      await message.delete()
-      end = time.perf_counter()
-      duration = (end - start) * 100
-
-
-
-      embed = discord.Embed(
-            title=f'', description='' , colour=0x2f3136)
-
-      embed.add_field(name="Client Ping:", value=f"{round(client.latency * 1000)}ms", inline=False)
-      embed.add_field(name="API Latency:", value=f"{round(duration)}ms", inline=False)
-      embed.add_field(name="Typing Delay:", value=f"{t2}ms", inline=False)
-
-      msg = await ctx.send(embed = embed)
-    except:
-        embed = discord.Embed(
-            title=f'The ping command had a error!', description="", colour=0x2f3136)
-
-  
-        msg = await ctx.send(embed = embed)
 
 
 

@@ -1364,7 +1364,6 @@ async def useful(ctx):
     embed = discord.Embed(
     title=f'Useful Commands', description=f'', colour=0xcccccc)
 
-    embed.add_field(name="Ping", value=f"Shows the bot latency.", inline=False)
     embed.add_field(name="Uptime", value=f"Shows the bot uptime.", inline=False)
     embed.add_field(name="Stats", value=f"Show information about the bot.", inline=False)
     embed.add_field(name="Setprefix", value=f"Changes the bots prefix.", inline=False)

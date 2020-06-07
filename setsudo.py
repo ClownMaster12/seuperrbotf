@@ -970,10 +970,14 @@ async def mutebroken(ctx):
     embed.set_footer(text="If this didn't work you can type '-bug [text]' to report a bug.")
     msg = await ctx.send(embed = embed)
 
-
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        return
+    raise error 
     
     
-    @client.command()
+@client.command()
 async def ping(ctx):
     try:
       t = time.time()

@@ -738,6 +738,7 @@ async def moderation(ctx):
     embed.add_field(name="Warn", value=f"Warns a specified member.", inline=False)
     embed.add_field(name="Mute", value=f"Mutes a specified member.", inline=False)
     embed.add_field(name="Unmute", value=f"Unmutes a specified member.", inline=False)
+    embed.add_field(name="Roles", value=f"Lists all roles in the server.", inline=False)
     await ctx.send(embed=embed)
 
 

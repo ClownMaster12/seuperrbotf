@@ -977,20 +977,7 @@ async def on_command_error(ctx, error):
     raise error 
     
     
-@client.command()
-async def ping(ctx):
-    try:
-      embed = discord.Embed(
-            title=f'', description='Client Ping: {len(client.latency * 1000)}' , colour=0x2f3136)
 
-
-      msg = await ctx.send(embed = embed)
-    except:
-        embed = discord.Embed(
-            title=f'The ping command had a error!', description="", colour=0x2f3136)
-
-  
-        msg = await ctx.send(embed = embed)
     
     
 
@@ -1023,7 +1010,20 @@ async def bug(ctx, *, something):
       msg = await ctx.send(embed = embed)
         
 
+@client.command()
+async def ping(ctx):
+    try:
+      embed = discord.Embed(
+            title=f'', description='Client Ping: {len(client.latency * 1000)}' , colour=0x2f3136)
 
+
+      msg = await ctx.send(embed = embed)
+    except:
+        embed = discord.Embed(
+            title=f'The ping command had a error!', description="", colour=0x2f3136)
+
+  
+        msg = await ctx.send(embed = embed)
 
 
 @client.command()

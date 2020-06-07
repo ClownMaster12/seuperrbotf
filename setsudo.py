@@ -244,6 +244,14 @@ async def changeprefix_error(ctx, error):
         await msg.add_reaction("❌")
     
 
+import psutil
+import time
+
+
+def seconds_elapsed():
+    return time.time() - psutil.boot_time()
+
+
 @client.command()
 async def system(ctx):
         """Get status of the server system."""
@@ -256,6 +264,7 @@ async def system(ctx):
             ("Process memory", f"{memory_use / math.pow(1024, 2):.2f}MB"),
             ("CPU Usage", f"{psutil.cpu_percent()}%"),
             ("RAM Usage", f"{mem.percent}%"),
+            ("System Uptime", f"{seconds_elapsed()}s")
         ]
 
         content = discord.Embed(

@@ -305,7 +305,7 @@ async def purge_error(ctx, error):
 @client.command()
 async def mutebroken(ctx):
     embed = discord.Embed(
-        title='', description=f'1 | **Are you sure there is a role called `muted`.**\n2 | **{client.user.name} might not have permission to add roles to members.**\n3 | **The mute role might be higher than the bots roles, causing the bot to not be able to add the role.**' , colour=discord.Colour.red())
+        title='', description=f'1 | **Are you sure there is a role called `Muted`.**\n2 | **{client.user.name} might not have permission to add roles to members.**\n3 | **The mute role might be higher than the bots roles, causing the bot to not be able to add the role.**' , colour=discord.Colour.red())
 
     embed.set_footer(text="If this didn't work you can type '-bug [text]' to report a bug.")
     msg = await ctx.send(embed = embed)

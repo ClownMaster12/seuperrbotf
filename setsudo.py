@@ -247,11 +247,9 @@ async def changeprefix_error(ctx, error):
 import psutil
 import time
 import discord
-import math
 import psutil
 import time
 import os
-import arrow
 import copy
 import aiohttp
 
@@ -268,7 +266,6 @@ async def system(ctx):
         memory_use = psutil.Process(pid).memory_info()[0]
 
         data = [
-            ("Process memory", f"{memory_use / math.pow(1024, 2):.2f}MB"),
             ("CPU Usage", f"{psutil.cpu_percent()}%"),
             ("RAM Usage", f"{mem.percent}%"),
             ("System Uptime", f"{seconds_elapsed()}s")

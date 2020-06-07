@@ -1123,7 +1123,7 @@ async def test(ctx):
 
 
 @client.command()
-async def pong(ctx):
+async def ping(ctx):
     try:
       t = time.time()
       await ctx.trigger_typing()

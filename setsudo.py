@@ -166,7 +166,7 @@ async def warn(ctx, member: discord.Member, *, note : str = None):
       embed=discord.Embed(title="You have recieved a warning.", description="You were warned in **{0}** by **{1}**. Moderator note is `{2}`.".format(ctx.message.guild.name, ctx.message.author, note), color=0x176cd5)
       embed.set_thumbnail(url="https://images.emojiterra.com/twitter/512px/26a0.png")
       await member.send(embed=embed)
-      embed=discord.Embed(title="Warning issued", color=0x176cd5)
+      embed=discord.Embed(title="Warning issued", color=0x2f3136)
       await ctx.send(embed=embed)
   except:
       embed=discord.Embed(title=f"There was a error with the `warn` command.", color=0x2f3136)

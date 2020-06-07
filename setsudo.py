@@ -507,9 +507,11 @@ async def on_guild_join(guild:discord.Guild):
 
 
 
+
+
 @client.event
 async def on_ready():
-    url = "https://www.cloudlist.xyz/api/stats/710090934502555648"
+    url = "https://www.cloudlist.xyz/api/stats/718205517054476320"
     payload = {"count": f"{len(client.guilds)}"}
     headers = {"Authorization": 'e5f544889911efe715b72b353'}
     r = requests.post(url, data=payload, headers=headers)
@@ -518,7 +520,7 @@ async def on_ready():
     payload = {"serverCount": f"{len(client.guilds)}", "shardCount": "1"}
     headers = {"authorization": 'XA-gTypCy2SoQfGOcb4LJo5pN5q'}
     r = requests.post(url, data=payload, headers=headers)
-    print("[+] https://wumpusbots.comz\n")
+    print("[+] wumpusbots.com\n")
     print("Bot is online!")
     print(f"Logged in as {client.user.name} ({client.user.id})")
     await client.change_presence(activity=discord.Game(name=f"with my prefix '-' | -help"), status=discord.Status.idle)

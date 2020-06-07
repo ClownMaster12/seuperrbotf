@@ -724,10 +724,6 @@ async def help(ctx):
 
 
 
-@client.command()
-async def ping(ctx):
-    """Sends the clients latency"""
-    await ctx.send(f"Ping! ( `{round(client.latency * 1000)}ms` )")
 
 
 @commands.is_owner()

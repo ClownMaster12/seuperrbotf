@@ -453,30 +453,6 @@ async def on_ready():
     print(f"Logged in as {client.user.name} ({client.user.id})")
     await client.change_presence(activity=discord.Game(name=f"with my prefix '-' | -help"), status=discord.Status.idle)
 
-start_time = datetime.datetime.utcnow() # Timestamp of when it came online
-
-@client.command()
-async def uptime(ctx):
-    """Shows the bots uptime"""
-    now = datetime.datetime.utcnow() # Timestamp of when uptime function is run
-    delta = now - start_time
-    hours, remainder = divmod(int(delta.total_seconds()), 3600)
-    minutes, seconds = divmod(remainder, 60)
-    days, hours = divmod(hours, 24)
-    if days:
-        time_format = "{d} days, {h} hours, {m} minutes, and {s} seconds."
-    else:
-        time_format = "{h} hours, {m} minutes, and {s} seconds."
-    uptime_stamp = time_format.format(d=days, h=hours, m=minutes, s=seconds)
-    embed = discord.Embed(
-        title=f'', description='' , colour=0x2f3136)
-
-
-  
-    embed.set_author(name=f"{format(uptime_stamp)}", icon_url=ctx.author.avatar_url)
-
-
-    msg = await ctx.send(embed = embed)
 
 @commands.is_owner()
 @client.command()
@@ -693,7 +669,6 @@ async def useful(ctx):
     title=f'Useful Commands', description=f'', colour=0xcccccc)
 
     embed.add_field(name="Ping", value=f"Shows the bot latency.", inline=False)
-    embed.add_field(name="Uptime", value=f"Shows the bot uptime.", inline=False)
     embed.add_field(name="Stats", value=f"Show information about the bot.", inline=False)
     embed.add_field(name="Setprefix", value=f"Changes the bots prefix.", inline=False)
     embed.add_field(name="Password", value=f"Generates a random password.", inline=False)

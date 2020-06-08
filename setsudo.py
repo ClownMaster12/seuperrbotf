@@ -257,42 +257,7 @@ import aiohttp
 def seconds_elapsed():
     return time.time() - psutil.boot_time()
 
-import psutil
-import platform
-from datetime import datetime
-import cpuinfo
 
-
-
-@client.command()
-async def system(ctx):
-        boot_time_timestamp = psutil.boot_time()
-        bt = datetime.fromtimestamp(boot_time_timestamp)
-        content = discord.Embed(
-            title="",
-            colour=int("5dadec", 16),
-            description="Grabbing System Info..",
-        )
-        m = await ctx.send(embed=content)
-        time.sleep(0)
-        system_uptime = time.time() - psutil.boot_time()
-        mem = psutil.virtual_memory()
-        pid = os.getpid()
-        memory_use = psutil.Process(pid).memory_info()[0]
-
-        data = [
-            ("CPU Usage:", f"{psutil.cpu_percent()}%"),
-            ("RAM Usage:", f"{mem.percent}%"),
-            ("System Uptime:", f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}"),
-            ("CPU:", f"{cpuinfo.get_cpu_info()['brand']}")
-        ]
-
-        content = discord.Embed(
-            title=":computer: System status",
-            colour=int("5dadec", 16),
-            description="\n".join(f"**{x[0]}** {x[1]}" for x in data),
-        )
-        await m.edit(embed=content)
 
 
 
@@ -802,6 +767,44 @@ async def _eval_error(ctx, error):
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
 
+        
+        
+import psutil
+import platform
+from datetime import datetime
+import cpuinfo
+
+
+
+@client.command()
+async def system(ctx):
+        boot_time_timestamp = psutil.boot_time()
+        bt = datetime.fromtimestamp(boot_time_timestamp)
+        content = discord.Embed(
+            title="",
+            colour=int("5dadec", 16),
+            description="Grabbing System Info..",
+        )
+        m = await ctx.send(embed=content)
+        time.sleep(0)
+        system_uptime = time.time() - psutil.boot_time()
+        mem = psutil.virtual_memory()
+        pid = os.getpid()
+        memory_use = psutil.Process(pid).memory_info()[0]
+
+        data = [
+            ("CPU Usage:", f"{psutil.cpu_percent()}%"),
+            ("RAM Usage:", f"{mem.percent}%"),
+            ("System Uptime:", f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}"),
+            ("CPU:", f"{cpuinfo.get_cpu_info()['brand']}")
+        ]
+
+        content = discord.Embed(
+            title=":computer: System status",
+            colour=int("5dadec", 16),
+            description="\n".join(f"**{x[0]}** {x[1]}" for x in data),
+        )
+        await m.edit(embed=content)
 
 client.loop.create_task(update_stats())
 client.run(env.TOKEN)

@@ -266,7 +266,7 @@ async def system(ctx):
             colour=int("5dadec", 16),
             description="Grabbing System Info..",
         )
-        await ctx.send(embed=content)
+        m = await ctx.send(embed=content)
         time.sleep(0)
         system_uptime = time.time() - psutil.boot_time()
         mem = psutil.virtual_memory()
@@ -285,7 +285,7 @@ async def system(ctx):
             colour=int("5dadec", 16),
             description="\n".join(f"**{x[0]}** {x[1]}" for x in data),
         )
-        await ctx.send(embed=content)
+        await m.edit(embed=content)
 
 
 

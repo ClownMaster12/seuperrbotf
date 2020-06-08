@@ -261,6 +261,13 @@ def seconds_elapsed():
 @client.command()
 async def system(ctx):
         """Get status of the server system."""
+        content = discord.Embed(
+            title="",
+            colour=int("5dadec", 16),
+            description="Grabbing System Info..",
+        )
+        await ctx.send(embed=content)
+        time.sleep(0)
         system_uptime = time.time() - psutil.boot_time()
         mem = psutil.virtual_memory()
         pid = os.getpid()
@@ -270,7 +277,7 @@ async def system(ctx):
             ("CPU Usage", f"{psutil.cpu_percent()}%"),
             ("RAM Usage", f"{mem.percent}%"),
             ("System Uptime", f"{seconds_elapsed()}s"),
-            ("CPU", f"{cpuinfo.get_cpu_info()['brand']}")
+            ("CPU:", f"{cpuinfo.get_cpu_info()['brand']}")
         ]
 
         content = discord.Embed(

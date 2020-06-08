@@ -6,7 +6,7 @@ import asyncio
 from collections import Counter, defaultdict
 import ast
 import psutil
-
+import cpuinfo
 import time
 
 import secrets
@@ -269,6 +269,7 @@ async def system(ctx):
             ("CPU Usage", f"{psutil.cpu_percent()}%"),
             ("RAM Usage", f"{mem.percent}%"),
             ("System Uptime", f"{seconds_elapsed()}s")
+            ("CPU", f"{cpuinfo.get_cpu_info()['brand']}")
         ]
 
         content = discord.Embed(

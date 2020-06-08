@@ -257,10 +257,17 @@ import aiohttp
 def seconds_elapsed():
     return time.time() - psutil.boot_time()
 
+import psutil
+import platform
+from datetime import datetime
+import cpuinfo
+
+
 
 @client.command()
 async def system(ctx):
-        """Get status of the server system."""
+        boot_time_timestamp = psutil.boot_time()
+        bt = datetime.fromtimestamp(boot_time_timestamp)
         content = discord.Embed(
             title="",
             colour=int("5dadec", 16),
@@ -274,9 +281,9 @@ async def system(ctx):
         memory_use = psutil.Process(pid).memory_info()[0]
 
         data = [
-            ("CPU Usage", f"{psutil.cpu_percent()}%"),
-            ("RAM Usage", f"{mem.percent}%"),
-            ("System Uptime", f"{seconds_elapsed()}s"),
+            ("CPU Usage:", f"{psutil.cpu_percent()}%"),
+            ("RAM Usage:", f"{mem.percent}%"),
+            ("System Uptime:", f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}"),
             ("CPU:", f"{cpuinfo.get_cpu_info()['brand']}")
         ]
 

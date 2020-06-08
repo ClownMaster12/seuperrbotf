@@ -465,30 +465,7 @@ async def unmute_error(ctx, error):
 
 
 
-@client.event
-async def on_guild_remove(guild:discord.Guild):
-  channel = client.get_channel(718950014843355157)
-  embed = discord.Embed(
-        title=f"I've been removed from a guild", description=f"", colour=discord.Colour.red())
-  embed.add_field(name="Name", value=guild.name, inline=True)
-  embed.add_field(name="Member Count", value=len(guild.members), inline=True)
-  embed.add_field(name="Guild Owner", value=guild.owner, inline=True)
-  embed.set_thumbnail(url=guild.icon_url)
-  embed.timestamp = datetime.datetime.utcnow()
 
-
-  await channel.send(embed=embed)
-  
-@client.event
-async def on_guild_join(guild:discord.Guild):
-  channel = client.get_channel(718950014843355157)
-  embed = discord.Embed(
-        title=f"I've been added to a guild", description=f"", colour=discord.Colour.green())
-  embed.add_field(name="Name", value=guild.name, inline=True)
-  embed.add_field(name="Member Count", value=len(guild.members), inline=True)
-  embed.add_field(name="Guild Owner", value=guild.owner, inline=True)
-  embed.set_thumbnail(url=guild.icon_url)
-  embed.timestamp = datetime.datetime.utcnow()
 
 
 

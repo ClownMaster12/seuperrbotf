@@ -269,7 +269,7 @@ async def system(ctx):
         data = [
             ("CPU Usage", f"{psutil.cpu_percent()}%"),
             ("RAM Usage", f"{mem.percent}%"),
-            ("System Uptime", f"{seconds_elapsed()}s")
+            ("System Uptime", f"{seconds_elapsed()}s"),
             ("CPU", f"{cpuinfo.get_cpu_info()['brand']}")
         ]
 

@@ -788,4 +788,4 @@ async def _eval_error(ctx, error):
 
 
 client.loop.create_task(update_stats())
-client.run("NzA3MDA5Nzg3MDg2MzcyOTQ0.Xs0q5A.qVctokS9OPs0R5cM09weAa8uJ5I")
+client.run(env.TOKEN)

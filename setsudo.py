@@ -442,7 +442,7 @@ async def unmute_error(ctx, error):
 async def on_ready():
     url = "https://www.cloudlist.xyz/api/stats/718205517054476320"
     payload = {"count": f"{len(client.guilds)}"}
-    headers = {"Authorization": 'e5f544889911efe715b72b353'}
+    headers = {"Authorization": '91d1ef2c1403da93000b23187'}
     r = requests.post(url, data=payload, headers=headers)
     print("[+] Posted count to: \n[+] Cloudlist.xyz")
     url = "https://wumpusbots.com/api/bot/718205517054476320/stats"

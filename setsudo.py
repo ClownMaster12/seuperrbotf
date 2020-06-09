@@ -635,7 +635,7 @@ async def fix(ctx):
 async def fix_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
         embed = discord.Embed(
-          title='Forbidden', description='This command is owner only.' , colour=discord.Colour.red())
+          title='Forbidden.', description='This command is owner only.' , colour=discord.Colour.red())
 
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")

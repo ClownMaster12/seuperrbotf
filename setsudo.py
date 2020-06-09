@@ -151,7 +151,7 @@ async def ping(ctx):
       msg = await ctx.send(embed = embed)
     except:
         embed = discord.Embed(
-            title=f'The ping command had a error!', description="", colour=0x2f3136)
+            title=f'The ping command had a error! Uh oh.', description="", colour=0x2f3136)
 
   
         msg = await ctx.send(embed = embed)

@@ -586,7 +586,7 @@ async def tt(ctx):
   try:
     a  = os.popen("git pull").readlines()
     time.sleep(0)
-    await ctx.send(f"```{a}```".replace("['", "").replace("']", "").replace("\n'", "\n").replace(",", "").replace("'", ""))
+    await ctx.send(f"```{a}```".replace("['", "").replace("']", "").replace("\n'", " \n").replace(",", "").replace("'", "").replace("\n", " \n"))
   except:
     await ctx.send("Error!")
 

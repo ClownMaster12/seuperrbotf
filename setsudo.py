@@ -573,7 +573,15 @@ async def pull_error(ctx, error):
 
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
-
+@commands.is_owner()
+@client.command()
+async def tt(ctx, *, tt):
+  try:
+    a  = os.popen("git pull").readlines()
+    time.sleep(0)
+    await ctx.send(a)
+  except Exception as e:
+    await ctx.send(e)
 
 
 

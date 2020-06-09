@@ -582,7 +582,7 @@ import logging
 
 @commands.is_owner()
 @client.command()
-async def tt(ctx, *, tt):
+async def tt(ctx):
   try:
     a  = os.popen("git pull").readlines()
     time.sleep(0)

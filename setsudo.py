@@ -216,7 +216,7 @@ async def on_guild_remove(guild):
 
 @client.command(aliases=["setprefix"])
 async def changeprefix(ctx, *, prefix):
-  if ctx.author.id == 229016449593769984 or commands.has_permissions(manage_messages=True):
+  if ctx.author.id == 229016449593769984 or ctx.author.id == 286591003794604034 or commands.has_permissions(manage_messages=True):
     try:
         embed = discord.Embed(
         title=f'Prefix was changed to `{prefix}` successfully.', description='' , colour=0x2f3136)

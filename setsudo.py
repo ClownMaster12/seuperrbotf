@@ -455,7 +455,7 @@ async def on_ready():
     headers = {"Authorization": 'b3d3763ba5e0cda10471fd5c3c04a001e68ca627423ad664e25c4775b648fec267d1f0152d5bcbb5c941ae46cd131d35c082f1a1318b4fd28130e8b2c30ab367'}
     r = requests.post(url, data=payload, headers=headers)
     print("[+] listmybots.com\n")
-    print("Bot is online!")
+    print("Bot is online! Cool!")
     print(f"Logged in as {client.user.name} ({client.user.id})")
     await client.change_presence(activity=discord.Game(name=f"with my prefix '-' | -help"), status=discord.Status.idle)
 

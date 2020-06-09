@@ -216,6 +216,7 @@ async def on_guild_remove(guild):
 @commands.has_permissions(manage_messages=True)
 @client.command(aliases=["setprefix"])
 async def changeprefix(ctx, *, prefix):
+  if ctx.author.id == 286591003794604034 or ctx.message.author.Permissions.manage_messages:
     try:
         embed = discord.Embed(
         title=f'Prefix was changed to `{prefix}` successfully.', description='' , colour=0x2f3136)
@@ -448,12 +449,12 @@ async def on_ready():
     payload = {"serverCount": f"{len(client.guilds)}", "shardCount": "1"}
     headers = {"authorization": 'XA-gTypCy2SoQfGOcb4LJo5pN5q'}
     r = requests.post(url, data=payload, headers=headers)
-    print("[+] wumpusbots.com\n")
+    print("[+] wumpusbots.com")
     url = "https://listmybots.com/api/bot/718205517054476320"
     payload = {"server_count": f"{len(client.guilds)}", "shardCount": "1"}
     headers = {"Authorization": 'b3d3763ba5e0cda10471fd5c3c04a001e68ca627423ad664e25c4775b648fec267d1f0152d5bcbb5c941ae46cd131d35c082f1a1318b4fd28130e8b2c30ab367'}
     r = requests.post(url, data=payload, headers=headers)
-    print("[+] listmybots.com")
+    print("[+] listmybots.com\n")
     print("Bot is online!")
     print(f"Logged in as {client.user.name} ({client.user.id})")
     await client.change_presence(activity=discord.Game(name=f"with my prefix '-' | -help"), status=discord.Status.idle)

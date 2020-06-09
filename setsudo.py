@@ -587,7 +587,7 @@ async def tt(ctx):
     a  = os.popen("git pull").readlines()
     time.sleep(0)
     embed = discord.Embed(
-           title='', description='f"```{a}```".replace("['", "").replace("']", "").replace("\n", "").replace(",", "").replace("'", "").replace(".\n'", "")', colour=random.randint(0, 0xFFFFFF))
+           title='', description=f"```{a}```".replace("['", "").replace("']", "").replace("\n", "").replace(",", "").replace("'", "").replace(".\n'", ""), colour=random.randint(0, 0xFFFFFF))
   
     m = await ctx.send(embed=embed)
   except:

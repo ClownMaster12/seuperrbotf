@@ -96,9 +96,7 @@ def get_prefix(client, message):
     with open("prefixes.json", "r") as f:
         prefixes = json.load(f)
         
-        
-
-    return commands.when_mentioned_or(*prefixes[str(message.guild.id)])(client, message)
+       
     
     
    

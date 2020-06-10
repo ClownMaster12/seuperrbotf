@@ -283,7 +283,7 @@ async def purge_error(ctx, error):
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
 
-
+@commands.has_permissions(manage_messages=True)
 @client.command()
 async def mutebroken(ctx):
     embed = discord.Embed(
@@ -291,7 +291,6 @@ async def mutebroken(ctx):
 
     embed.set_footer(text="If this didn't work you can type '-bug [text]' to report a bug")
     msg = await ctx.send(embed = embed)
-
 
 
 
@@ -402,13 +401,27 @@ async def muterole(ctx):
             time.sleep(0)
             await msg.delete()
   except discord.Forbidden:
-            return await ctx.send("I have no permissions to make a muted role")
+    embed = discord.Embed(
+        title='', description=f'I have no permissions to make a `Muted` role.' , colour=discord.Colour.green())
+
+
+    return msg = await ctx.send(embed = embed)
+
     
   embed = discord.Embed(
         title='', description=f'The role `Muted` has been created. You can now mute members.' , colour=discord.Colour.green())
 
 
   await ctx.send(embed = embed)
+@muterole.error
+async def muterole_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `manage_messages` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
 
 
 @client.command()

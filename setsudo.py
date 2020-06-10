@@ -771,9 +771,9 @@ async def help(ctx):
   embed = discord.Embed(
     title=f'Help command', description=f'', colour=0xcccccc)
 
-  embed.add_field(name=f"{ctx.prefix}`moderation`", value=f"Shows moderation commands.", inline=False)
-  embed.add_field(name=f"{ctx.prefix}`useful`", value=f"Shows useful commands", inline=False)
-  embed.add_field(name=f"{ctx.prefix}`dev`", value=f"Shows developer commands.", inline=False)
+  embed.add_field(name=f"{ctx.prefix}`moderation`".replace("<@!718205517054476320> ", "-"), value=f"Shows moderation commands.", inline=False)
+  embed.add_field(name=f"{ctx.prefix}`useful`".replace("<@!718205517054476320> ", "-"), value=f"Shows useful commands", inline=False)
+  embed.add_field(name=f"{ctx.prefix}`dev`".replace("<@!718205517054476320> ", "-"), value=f"Shows developer commands.", inline=False)
 
   await ctx.send(embed=embed)
 

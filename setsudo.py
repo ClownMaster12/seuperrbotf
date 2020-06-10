@@ -390,7 +390,7 @@ async def mute_error(ctx, error):
 async def muterole(ctx):
   try: # creates muted role 
             embed = discord.Embed(
-               title='', description=f'Creating role..' , colour=discord.Colour.red())
+               title='', description=f'Creating role..' , colour=discord.Colour.green())
 
 
             msg = await ctx.send(embed = embed)  
@@ -405,7 +405,7 @@ async def muterole(ctx):
             return await ctx.send("I have no permissions to make a muted role")
     
   embed = discord.Embed(
-        title='', description=f'The role `Muted` has been created. You can now mute members.' , colour=discord.Colour.red())
+        title='', description=f'The role `Muted` has been created. You can now mute members.' , colour=discord.Colour.green())
 
 
   await ctx.send(embed = embed)

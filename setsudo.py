@@ -369,7 +369,7 @@ async def mute(ctx, member: discord.Member=None):
     msg = await ctx.send(embed = embed)
   except:
       embed = discord.Embed(
-        title='', description=f'There was a error with the `mute` command. Please type `{ctx.prefix}muterole` to create a role.' , colour=discord.Colour.red())
+        title='', description=f'There was a error with the `mute` command. Please type `{ctx.prefix}muterole` to create a role.' , colour=discord.Colour.green())
 
 
       msg = await ctx.send(embed = embed)

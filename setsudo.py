@@ -402,7 +402,7 @@ async def muterole(ctx):
             await msg.delete()
   except discord.Forbidden:
     embed = discord.Embed(
-        title='', description=f'I have no permissions to make a `Muted` role.' , colour=discord.Colour.green())
+        title='', description=f'I have no permissions to make a `Muted` role.' , colour=discord.Colour.red())
 
 
     return await ctx.send(embed = embed)

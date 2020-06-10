@@ -303,7 +303,9 @@ async def on_message(message):
     if message.author.bot:
         return
     if client.user in message.mentions: 
-        await message.channel.send(f"My prefix is `-` or {client.user.mention}")
+        embed = discord.Embed(
+        title='', description=f'My prefix is `-` or {client.user.mention}' , colour=discord.Colour.blurple())
+        await message.channel.send(embed = embed)
     await client.process_commands(message)
    
 @client.command()

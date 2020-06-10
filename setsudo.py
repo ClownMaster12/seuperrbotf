@@ -95,6 +95,17 @@ async def update_stats():
 def get_prefix(client, message):
     with open("prefixes.json", "r") as f:
         prefixes = json.load(f)
+        
+        
+    test = ['wewddwdwdwdwwddwdwwdwdwdwdwdwddwdwwwasdawddas£&£*£*£*"!(£(!£*(£7u49389w840&*($"*($8)"*)"$("I)&")|(%")%&*9']
+
+    # Check to see if we are outside of a guild. e.g DM's etc.
+    if not message.guild:
+        # Only allow ? to be used in DMs
+        return '-'
+
+    # If we are in a guild, we allow for the user to mention us or use any of the prefixes in our list.
+    return commands.when_mentioned_or(*test)(bot, message)
     
     
    

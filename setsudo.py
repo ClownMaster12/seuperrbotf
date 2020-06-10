@@ -394,20 +394,20 @@ async def muterole(ctx):
                 await channel.set_permissions(muted, send_messages=False,
                                               read_message_history=False,
                                               read_messages=False)
+             embed = discord.Embed(
+               title='', description=f'Creating role..' , colour=discord.Colour.red())
+
+
+             msg = await ctx.send(embed = embed)   
+             time.sleep(0)
   except discord.Forbidden:
             return await ctx.send("I have no permissions to make a muted role")
     
   embed = discord.Embed(
-        title='', description=f'Creating role..' , colour=discord.Colour.red())
-
-
-  msg = await ctx.send(embed = embed)
-  time.sleep(0)
-  embed = discord.Embed(
         title='', description=f'The role `Muted` has been created. You can now mute members.' , colour=discord.Colour.red())
 
 
-  msg = await ctx.send(embed = embed)
+  await msg.edit(embed = embed)
 
 
 @client.command()

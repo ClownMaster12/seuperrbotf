@@ -97,7 +97,7 @@ def get_prefix(client, message):
         prefixes = json.load(f)
         
         
-    test = ['wewddwdwdwdwwddwdwwdwdwdwdwdwddwdwwwasdawddas£&£*£*£*"!(£(!£*(£7u49389w840&*($"*($8)"*)"$("I)&")|(%")%&*9']
+
 
     # Check to see if we are outside of a guild. e.g DM's etc.
     if not message.guild:
@@ -105,7 +105,7 @@ def get_prefix(client, message):
         return '-'
 
     # If we are in a guild, we allow for the user to mention us or use any of the prefixes in our list.
-    return commands.when_mentioned_or(*test)(client, message)
+    return commands.when_mentioned_or(*prefixes)(client, message)
     
     
    

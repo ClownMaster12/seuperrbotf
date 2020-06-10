@@ -393,7 +393,7 @@ async def muterole(ctx):
 
 
             msg = await ctx.send(embed = embed)  
-            muted = await ctx.guild.create_role(name="Muted", reason="To use for muting")
+            muted = await ctx.guild.create_role(name="Muted", reason="Used for muting members.")
             for channel in ctx.guild.channels: # removes permission to view and send in the channels 
                 await channel.set_permissions(muted, send_messages=False,
                                               read_message_history=False,
@@ -750,6 +750,7 @@ async def moderation(ctx):
     embed.add_field(name="Warn", value=f"Warns a specified member.", inline=False)
     embed.add_field(name="Mute", value=f"Mutes a specified member.", inline=False)
     embed.add_field(name="Unmute", value=f"Unmutes a specified member.", inline=False)
+    embed.add_field(name="Muterole", value=f"Creates a muted role.", inline=False)
     embed.add_field(name="Roles", value=f"Lists all roles in the server.", inline=False)
     await ctx.send(embed=embed)
 

@@ -369,7 +369,7 @@ async def mute(ctx, member: discord.Member=None):
     msg = await ctx.send(embed = embed)
   except:
       embed = discord.Embed(
-        title='', description=f'There was a error with the `mute` command. Please type `{ctx.prefix}mutebroken` on ways to fix this.' , colour=discord.Colour.red())
+        title='', description=f'There was a error with the `mute` command. Please type `{ctx.prefix}muterole` to create a role.' , colour=discord.Colour.red())
 
 
       msg = await ctx.send(embed = embed)
@@ -382,6 +382,20 @@ async def mute_error(ctx, error):
 
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
+
+        
+        
+        
+@client.command()
+async def muterole(ctx):
+  try: # creates muted role 
+            muted = await ctx.guild.create_role(name="Muted", reason="To use for muting")
+            for channel in ctx.guild.channels: # removes permission to view and send in the channels 
+                await channel.set_permissions(muted, send_messages=False,
+                                              read_message_history=False,
+                                              read_messages=False)
+  except discord.Forbidden:
+            return await ctx.send("I have no permissions to make a muted role")
 
 
 @client.command()

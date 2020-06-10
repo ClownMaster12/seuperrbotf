@@ -105,7 +105,7 @@ def get_prefix(client, message):
         return '-'
 
     # If we are in a guild, we allow for the user to mention us or use any of the prefixes in our list.
-    return commands.when_mentioned_or(*test)(bot, message)
+    return commands.when_mentioned_or(*test)(client, message)
     
     
    

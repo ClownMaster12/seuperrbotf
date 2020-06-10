@@ -98,7 +98,7 @@ def get_prefix(client, message):
         
        
     
-    return commands.when_mentioned_or(prefixes[str(message.guild.id)])(bot, message)
+    return commands.when_mentioned_or(prefixes[str(message.guild.id)])(client, message)
    
     return prefixes[str(message.guild.id)]
 

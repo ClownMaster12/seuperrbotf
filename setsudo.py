@@ -384,7 +384,7 @@ async def mute_error(ctx, error):
 
         
         
-        
+@commands.has_permissions(manage_messages=True)
 @client.command()
 async def muterole(ctx):
   try: # creates muted role 

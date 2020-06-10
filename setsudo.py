@@ -396,6 +396,11 @@ async def muterole(ctx):
                                               read_messages=False)
   except discord.Forbidden:
             return await ctx.send("I have no permissions to make a muted role")
+  embed = discord.Embed(
+        title='', description=f'The role `Muted` has been created. You can now mute members.' , colour=discord.Colour.red())
+
+
+  msg = await ctx.send(embed = embed)
 
 
 @client.command()

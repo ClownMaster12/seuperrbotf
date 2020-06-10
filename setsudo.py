@@ -97,8 +97,6 @@ def get_prefix(client, message):
         prefixes = json.load(f)
         
        
-    
-    return commands.when_mentioned_or(prefixes[str(message.guild.id)])(client, message)
    
     return prefixes[str(message.guild.id)]
 
@@ -304,7 +302,8 @@ async def on_message(message):
         return
     if client.user in message.mentions: 
         embed = discord.Embed(
-        title='', description=f'My prefix is `-` or {client.user.mention}' , colour=discord.Colour.blurple())
+        title='', description=f'My prefix is `-`' , colour=discord.Colour.blurple())
+        embed.set_footer(text="If the prefix doesn't work try asking a moderator.")
         await message.channel.send(embed = embed)
     await client.process_commands(message)
    

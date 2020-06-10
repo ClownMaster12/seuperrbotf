@@ -98,14 +98,7 @@ def get_prefix(client, message):
         
         
 
-
-    # Check to see if we are outside of a guild. e.g DM's etc.
-    if not message.guild:
-        # Only allow ? to be used in DMs
-        return '-'
-
-    # If we are in a guild, we allow for the user to mention us or use any of the prefixes in our list.
-    return commands.when_mentioned_or(*prefixes)(client, message)
+    return commands.when_mentioned_or(*prefixes[str(message.guild.id)])(client, message)
     
     
    

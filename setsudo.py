@@ -405,7 +405,7 @@ async def muterole(ctx):
         title='', description=f'I have no permissions to make a `Muted` role.' , colour=discord.Colour.green())
 
 
-    return msg = await ctx.send(embed = embed)
+    return await ctx.send(embed = embed)
 
     
   embed = discord.Embed(

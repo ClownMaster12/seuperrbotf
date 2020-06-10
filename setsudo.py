@@ -294,8 +294,18 @@ async def mutebroken(ctx):
     embed.set_footer(text="If this didn't work you can type '-bug [text]' to report a bug")
     msg = await ctx.send(embed = embed)
 
-
-
+    
+    
+    
+    
+@client.event
+async def on_message(message):
+    if message.author.bot:
+        return
+    if client.user in message.mentions: 
+        await message.channel.send(f"My prefix is `-` or {client.user.mention}")
+    await client.process_commands(message)
+   
 @client.command()
 async def bug(ctx, *, something):
   try:

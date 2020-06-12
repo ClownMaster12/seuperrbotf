@@ -541,7 +541,7 @@ async def test(ctx):
       output = out.stdout.decode()
       await m.delete()
       embed = discord.Embed(
-        title='', description=f"```h\n{output}```", colour=discord.Colour.blurple())
+        title='', description=f"```diff\n{output}```", colour=discord.Colour.blurple())
 
 
       msg = await ctx.send(embed = embed)

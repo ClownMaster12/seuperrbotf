@@ -526,7 +526,7 @@ from logzero import logger
 
 
 @client.command()
-async def pull(ctx):
+async def test(ctx):
   if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
     try: 
       embed = discord.Embed(

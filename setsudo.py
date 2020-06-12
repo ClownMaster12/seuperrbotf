@@ -130,7 +130,7 @@ async def ping(ctx):
       await ctx.trigger_typing()
       t2 = round((time.time() - t) * 1000)
       start = time.perf_counter()
-      embed = discord.Embed(title=f'', description=f'Pinging...', colour=0x2f3136)
+      embed = discord.Embed(title=f'Pinging...', description=f'', colour=0x2f3136)
 
 
 
@@ -526,7 +526,7 @@ from logzero import logger
 
 
 @client.command()
-async def test(ctx):
+async def pull(ctx):
   if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
     try: 
       embed = discord.Embed(
@@ -541,7 +541,7 @@ async def test(ctx):
       output = out.stdout.decode()
       await m.delete()
       embed = discord.Embed(
-        title='', description=f"```diff\n{output}```", colour=discord.Colour.blurple())
+        title='', description=f"```h\n{output}```", colour=discord.Colour.blurple())
 
 
       msg = await ctx.send(embed = embed)
@@ -670,7 +670,7 @@ async def ban_error(ctx, error):
 
 
 @client.command()
-async def pull(ctx):
+async def test(ctx):
   if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
     embed = discord.Embed(
        title='Pulling..', description='', colour=random.randint(0, 0xFFFFFF))

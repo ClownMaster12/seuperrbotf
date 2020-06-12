@@ -484,7 +484,31 @@ async def unmute_error(ctx, error):
 
 
 
+import subprocess
+import logzero
+from logzero import logger
 
+@commands.is_owner()
+@client.command()
+async def pingip(ctx, *, ping):
+    try: 
+      embed = discord.Embed(
+        title='', description=f"Pinging..", colour=discord.Colour.blurple())
+
+
+      m = await ctx.send(embed = embed)
+  
+      logzero.logfile("logfile.log", maxBytes=1e6, backupCount=3, disableStderrLogger=False)
+ 
+      out = subprocess.run(['ping', f'{ping}'], capture_output=True)
+      output = out.stdout.decode()
+      await m.delete()
+      embed = discord.Embed(
+        title='', description=f"```h\n{output}```", colour=discord.Colour.blurple())
+
+
+      msg = await ctx.send(embed = embed)
+  
 
 
 
@@ -712,6 +736,7 @@ async def dev(ctx):
   embed.add_field(name="Pull", value=f"Pulls changes from github.", inline=False)
   embed.add_field(name="Reload", value=f"Reloads all commands.", inline=False)
   embed.add_field(name="Eval", value=f"Evaluates code.", inline=False)
+  embed.add_field(name="Pingip", value=f"Pings a ip address .", inline=False)
   await ctx.send(embed=embed)
 
 

@@ -636,8 +636,7 @@ async def ban_error(ctx, error):
 
 
 
-    
-@commands.is_owner()
+
 @client.command()
 async def pull(ctx):
   if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
@@ -664,26 +663,12 @@ async def pull_error(ctx, error):
       
     
     
-    
-import subprocess
-import logging
-
-@commands.is_owner()
-@client.command()
-async def tt(ctx):
-  try:
-    a  = os.popen("git pull").readlines()
-    time.sleep(0)
-    embed = discord.Embed(
-           title='', description=f"```{a}```".replace("['", "").replace("']", "").replace("\n ", " \n ").replace(",", "").replace("'", "").replace(".\n'", ""), colour=random.randint(0, 0xFFFFFF))
-  
-    m = await ctx.send(embed=embed)
-  except:
-    await ctx.send("Error!")
 
 
 
-@commands.is_owner()
+
+
+
 @client.command(pass_context=True, aliases=["r"])
 async def reload(ctx):
     if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
@@ -709,7 +694,6 @@ async def reload_error(ctx, error):
 
 
 
-@commands.is_owner()
 @client.command()
 async def fix(ctx):
   if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
@@ -821,7 +805,7 @@ async def help(ctx):
 
 
 
-@commands.is_owner()
+
 @client.command(pass_context=True, name='eval')
 async def _eval(ctx, *, code="You need to input code."):
   if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:

@@ -137,7 +137,7 @@ async def ping(ctx):
       message = await ctx.send(embed=embed)
       await message.delete()
       end = time.perf_counter()
-      duration = (end - start) * 1000
+      duration = (end - start) * 100
 
 
 

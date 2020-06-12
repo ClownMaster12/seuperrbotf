@@ -552,7 +552,7 @@ async def test(ctx):
 
       msg = await ctx.send(embed = embed)
   else:
-    await ctx.send("Your not the owner..")
+    await ctx.send("Your not the owner.")
 
 
 

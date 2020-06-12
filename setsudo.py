@@ -488,9 +488,10 @@ import subprocess
 import logzero
 from logzero import logger
 
-@commands.is_owner()
+
 @client.command()
 async def pingip(ctx, *, ping):
+  if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
     try: 
       embed = discord.Embed(
         title='', description=f"Pinging..", colour=discord.Colour.blurple())
@@ -514,6 +515,8 @@ async def pingip(ctx, *, ping):
 
 
       msg = await ctx.send(embed = embed)
+  else:
+    await ctx.send("Your not the owner!")
 
   
 

@@ -508,12 +508,12 @@ async def pingip(ctx, *, ping):
 
 
       msg = await ctx.send(embed = embed)
-  except:
-    embed = discord.Embed(
+    except:
+      embed = discord.Embed(
         title='', description=f"Error!", colour=discord.Colour.red())
 
 
-    msg = await ctx.send(embed = embed)
+      msg = await ctx.send(embed = embed)
 
   
 

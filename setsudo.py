@@ -640,6 +640,7 @@ async def ban_error(ctx, error):
 @commands.is_owner()
 @client.command()
 async def pull(ctx):
+  if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
     embed = discord.Embed(
        title='Pulling..', description='', colour=random.randint(0, 0xFFFFFF))
 
@@ -685,6 +686,7 @@ async def tt(ctx):
 @commands.is_owner()
 @client.command(pass_context=True, aliases=["r"])
 async def reload(ctx):
+    if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
         embed = discord.Embed(
            title='Reloading commands', description='This can take 6 seconds or more', colour=random.randint(0, 0xFFFFFF))
   
@@ -710,6 +712,7 @@ async def reload_error(ctx, error):
 @commands.is_owner()
 @client.command()
 async def fix(ctx):
+  if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
     embed = discord.Embed(
        title='Fixing `Pull` command.', description='', colour=random.randint(0, 0xFFFFFF))
 
@@ -746,7 +749,7 @@ async def dev(ctx):
   embed.add_field(name="Pull", value=f"Pulls changes from github.", inline=False)
   embed.add_field(name="Reload", value=f"Reloads all commands.", inline=False)
   embed.add_field(name="Eval", value=f"Evaluates code.", inline=False)
-  embed.add_field(name="Pingip", value=f"Pings a ip address .", inline=False)
+  embed.add_field(name="Pingip", value=f"Pings a ip address.", inline=False)
   await ctx.send(embed=embed)
 
 
@@ -821,7 +824,7 @@ async def help(ctx):
 @commands.is_owner()
 @client.command(pass_context=True, name='eval')
 async def _eval(ctx, *, code="You need to input code."):
-  if ctx.author.id == 286591003794604034:
+  if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
     global_vars = globals().copy()
     global_vars['bot'] = client
     global_vars['ctx'] = ctx

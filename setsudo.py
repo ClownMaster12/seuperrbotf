@@ -298,11 +298,15 @@ async def mutebroken(ctx):
     
 @client.event
 async def on_message(message):
+    with open("prefixes.json", "r") as f:
+        prefixes = json.load(f)
+        
+    e = prefixes[str(message.guild.id)]
     if message.author.bot:
         return
     if client.user in message.mentions: 
         embed = discord.Embed(
-        title='', description=f'Main prefix: `-` \nCustom prefix: `{get_prefix.e}`' , colour=discord.Colour.blurple())
+        title='', description=f'Main prefix: `-` \nCustom prefix: `{e}`' , colour=discord.Colour.blurple())
 
         
    

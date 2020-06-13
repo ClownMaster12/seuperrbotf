@@ -302,7 +302,7 @@ async def on_message(message):
         return
     if client.user in message.mentions: 
         embed = discord.Embed(
-        title='', description=f'My prefix is `-`' , colour=discord.Colour.blurple())
+        title='', description=f'Main prefix: `-` \nCustom prefix: `{get_prefix}`' , colour=discord.Colour.blurple())
         embed.set_footer(text="If the prefix doesn't work try asking a moderator.")
         await message.channel.send(embed = embed)
     await client.process_commands(message)

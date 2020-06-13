@@ -306,7 +306,7 @@ async def on_message(message):
         return
     if client.user in message.mentions: 
         embed = discord.Embed(
-        title='', description=f'Main prefix: `-` \nCustom prefix: `{e}`' , colour=discord.Colour.blurple())
+        title='', description=f'Prefix: `{e}`' , colour=discord.Colour.blurple())
 
         
    

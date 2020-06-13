@@ -96,7 +96,7 @@ def get_prefix(client, message):
     with open("prefixes.json", "r") as f:
         prefixes = json.load(f)
         
-       
+    e = prefixes[str(message.guild.id)]
    
     return prefixes[str(message.guild.id)]
 
@@ -303,7 +303,9 @@ async def on_message(message):
     if client.user in message.mentions: 
         embed = discord.Embed(
         title='', description=f'Main prefix: `-` \nCustom prefix: `{get_prefix}`' , colour=discord.Colour.blurple())
-        embed.set_footer(text="If the prefix doesn't work try asking a moderator.")
+
+        
+   
         await message.channel.send(embed = embed)
     await client.process_commands(message)
    

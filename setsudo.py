@@ -707,6 +707,7 @@ async def ban_error(ctx, error):
         await msg.add_reaction("❌")@client.command()
         
 @commands.has_permissions(ban_members=True)
+@client.command()
 async def softban(ctx, member:discord.Member = None):
     try:
         if not member:

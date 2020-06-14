@@ -107,8 +107,6 @@ import os
 
 
 
-client=discord.Client()
-client=discord.Client(shard_count=1,shard_id=1)
 client = commands.Bot(command_prefix = "img ")
 client.remove_command('help')
 

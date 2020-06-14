@@ -560,7 +560,38 @@ async def pull(ctx):
   else:
     await ctx.send("Your not the owner.")
 
+@client.command()
+async def console(ctx, *, hi):
+  if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
+    try:
+      embed = discord.Embed(
+        title='', description=f"Processing..", colour=discord.Colour.blurple())
 
+
+      m = await ctx.send(embed = embed)
+  
+      logzero.logfile("logfile3.log", maxBytes=1e6, backupCount=3, disableStderrLogger=False)
+ 
+      out = subprocess.run([f"{hi}"], capture_output=True)
+      output = out.stdout.decode()
+      await m.delete()
+      embed = discord.Embed(
+        title='', description=f"```h\n{output}```", colour=discord.Colour.blurple())
+
+
+      msg = await ctx.send(embed = embed)
+    except:
+      embed = discord.Embed(
+        title='', description=f"Error!", colour=discord.Colour.red())
+
+
+      msg = await ctx.send(embed = embed)
+  else:
+    await ctx.send("Your not the owner.")
+    
+    
+    
+   
 
 
 @client.event
@@ -830,6 +861,7 @@ async def dev(ctx):
   embed.add_field(name="Reload", value=f"Reloads all commands.", inline=False)
   embed.add_field(name="Eval", value=f"Evaluates code.", inline=False)
   embed.add_field(name="Pingip", value=f"Pings a ip address.", inline=False)
+  embed.add_field(name="Console", value=f"Runs a command in console.", inline=False)
   await ctx.send(embed=embed)
 
 

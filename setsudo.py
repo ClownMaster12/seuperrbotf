@@ -562,7 +562,7 @@ async def pull(ctx):
 
 @client.command()
 async def console(ctx, *, hi):
-  if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
+  if ctx.author.id == 286591003794604034 or ctx.author.id == 286591003794604034:
     try:
       text = f"{hi}".replace(" ", "', '").replace("ipconfig", "no")
       embed = discord.Embed(

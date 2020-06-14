@@ -588,8 +588,12 @@ async def console(ctx, *, hi):
 
       msg = await ctx.send(embed = embed)
   else:
-    await ctx.send("Your not the owner.")
-    
+    embed = discord.Embed(
+        title='Forbidden', description=f"Your not the owner.", colour=discord.Colour.red())
+
+
+    msg = await ctx.send(embed = embed)
+
     
     
    

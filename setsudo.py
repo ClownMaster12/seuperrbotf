@@ -573,12 +573,12 @@ async def console(ctx, *, hi):
   
       logzero.logfile("logfile3.log", maxBytes=1e6, backupCount=3, disableStderrLogger=False)
  
-      out = subprocess.run([f'{text}'], capture_output=True, stdout=PIPE)
+      out = subprocess.run([f'{text}'], capture_output=True, shell=True)
       output = out.stdout.decode()
       await m.delete()
       embed = discord.Embed(
         title='', description=f"```h\n{output}```", colour=discord.Colour.blurple())
-
+      embed.set_footer(text="This is a linux terminal.")
 
       msg = await ctx.send(embed = embed)
     except Exception as e:

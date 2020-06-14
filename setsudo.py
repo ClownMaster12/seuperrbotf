@@ -563,6 +563,7 @@ async def pull(ctx):
 @client.command()
 async def console(ctx, *, hi):
   if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
+    try:
       embed = discord.Embed(
         title='', description=f"Processing..", colour=discord.Colour.blurple())
 
@@ -579,7 +580,12 @@ async def console(ctx, *, hi):
 
 
       msg = await ctx.send(embed = embed)
+    except Exception as e:
+      embed = discord.Embed(
+        title='Erro!', description=f"{e}", colour=discord.Colour.red())
 
+
+      msg = await ctx.send(embed = embed)
   else:
     await ctx.send("Your not the owner.")
     

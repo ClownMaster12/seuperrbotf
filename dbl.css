@@ -406,17 +406,19 @@ p {
 ## `Moderation Commands:`
 - ### `Ban: Bans a specified member.`
 - ### `Kick: Kicks a specified member.`
+- ### `Softban: Bans and Unbans a specified user.`
+- ### `Unban: Unbans a specified user.`
 - ### `Purge: Purges the chat.`
 - ### `Warn: Warns a specified member.`
 - ### `Mute: Mutes a specified member.`
 - ### `Unmute: Unmutes a specified member.`
+- ### `Muterole: Creates a muted role.`
 - ### `Roles: Lists all roles in the server.`
 
 -----
 
 ## `Useful Commands:`
 - ### `Ping: Shows the bot latency.`
-- ### `Uptime: Shows the bot uptime.`
 - ### `Stats: Show information about the bot.`
 - ### `Setprefix: Changes the bots prefix.`
 - ### `Password: Generates a random password.`
@@ -429,6 +431,7 @@ p {
 - ### `Pull: Pulls changes from github.`
 - ### `Reload: Reloads all commands.`
 - ### `Eval: Evaluates code.`
+- ### `Pingip: Pings a ip address.`
 
 
 <h1 style="background-color:LightGray;"></h1>

@@ -582,7 +582,7 @@ async def console(ctx, *, hi):
       msg = await ctx.send(embed = embed)
     except Exception as e:
       embed = discord.Embed(
-        title='Erro!', description=f"{e}", colour=discord.Colour.red())
+        title='Error!', description=f"{e}", colour=discord.Colour.red())
 
 
       msg = await ctx.send(embed = embed)

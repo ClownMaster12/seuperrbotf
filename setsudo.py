@@ -496,7 +496,7 @@ from logzero import logger
 
 
 @client.command()
-async def pingip(ctx, *, ping):
+async def pingip(ctx, *, ping="google.com"):
   if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
     try: 
       embed = discord.Embed(

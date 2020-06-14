@@ -6,7 +6,7 @@ import env
 import json
 
 #Variables
-client = commands.Client(command_prefix='-')
+client = commands.client(command_prefix='-')
 
   
 @client.event

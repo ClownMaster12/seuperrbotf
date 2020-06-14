@@ -564,7 +564,7 @@ async def pull(ctx):
 async def console(ctx, *, hi):
   if ctx.author.id == 286591003794604034 or ctx.author.id == 229016449593769984:
     try:
-      text = "{hi}".replace(" ", "', '")
+      text = "{hi}".replace(" ", "', '").replace("ipconfig", "no")
       embed = discord.Embed(
         title='', description=f"Processing..", colour=discord.Colour.blurple())
 

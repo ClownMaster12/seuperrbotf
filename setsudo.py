@@ -645,6 +645,39 @@ async def kick_error(ctx, error):
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
 
+@commands.has_permissions(ban_members=True)
+@client.command()
+async def unban(ctx, *, member="f"):
+  try:
+    banned_users = await ctx.guild.bans()
+    member_name, member_discriminator = member.split('#')
+
+    for ban_entry in banned_users:
+      user = ban_entry.user
+
+      if (user.name, user.discriminator) == (member_name, member_discriminator):
+        await ctx.guild.unban(user)
+        embed = discord.Embed(
+          title=f"Unbanned the user `{user.name}#{user.discriminator}`", description="", colour=0x2f3136)
+
+
+        msg = await ctx.send(embed = embed)
+
+  except:
+    embed = discord.Embed(
+          title="You didn't do the name right. ", description="`Usage: unban [name]#[discriminator]`", colour=discord.Colour.red())
+
+
+    msg = await ctx.send(embed = embed)
+@unban.error
+async def unban_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `ban_members` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
 
 
 @client.command()

@@ -578,7 +578,6 @@ async def console(ctx, *, hi):
       await m.delete()
       embed = discord.Embed(
         title='', description=f"```h\n{output}```", colour=discord.Colour.blurple())
-      embed.set_footer(text="This is a linux terminal.")
 
       msg = await ctx.send(embed = embed)
     except Exception as e:

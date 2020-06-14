@@ -3,11 +3,10 @@ from discord.ext import commands
 import requests
 import asyncio
 import env
-import config
 import json
 
 #Variables
-client = commands.Client(command_prefix='Bot Prefix (Example: b;)')
+client = commands.Client(command_prefix='-')
 
   
 @client.event

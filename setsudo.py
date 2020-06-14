@@ -705,7 +705,55 @@ async def ban_error(ctx, error):
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
 
+@client.command()
+@commands.has_permissions(ban_members=True)
+async def ban(ctx, member:discord.Member = None):
+    try:
+        if not member:
+            embed=discord.Embed(title=f"Specify a member inside the server to ban", color=0x2f3136)
+            await ctx.send(embed=embed)
+            return
+        await member.ban()
+        embed=discord.Embed(title=f"`{member.name}` has been banned from `{ctx.guild.name}`", color=0x2f3136)
+        await ctx.send(embed=embed)
+    except:
+        embed=discord.Embed(title=f"That member has equal or higher permissions to me.", color=0x2f3136)
+        await ctx.send(embed=embed)
 
+@ban.error
+async def ban_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `ban_members` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")@client.command()
+        
+@commands.has_permissions(ban_members=True)
+async def softban(ctx, member:discord.Member = None):
+    try:
+        if not member:
+            embed=discord.Embed(title=f"Specify a member inside the server to ban", color=0x2f3136)
+            await ctx.send(embed=embed)
+            return
+        await member.ban()
+        await member.unban()
+        embed=discord.Embed(title=f"`{member.name}` has been softbanned from `{ctx.guild.name}`", color=0x2f3136)
+        await ctx.send(embed=embed)
+    except:
+        embed=discord.Embed(title=f"That member has equal or higher permissions to me.", color=0x2f3136)
+        await ctx.send(embed=embed)
+
+@softban.error
+async def softban_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+        title='Sorry.', description='You need the `ban_members` permission to use this command.' , colour=discord.Colour.red())
+
+
+        msg = await ctx.send(embed = embed)
+        await msg.add_reaction("❌")
 
 
 @client.command()
@@ -849,9 +897,12 @@ async def useful(ctx):
 async def moderation(ctx):
     embed = discord.Embed(
     title=f'Moderation Commands', description=f'', colour=0xcccccc)
-
+     
+ 
     embed.add_field(name="Ban", value=f"Bans a specified member.", inline=False)
     embed.add_field(name="Kick", value=f"Kicks a specified member.", inline=False)
+    embed.add_field(name="Softban", value=f"Bans and Unbans a specified user.", inline=False)
+    embed.add_field(name="Unban", value=f"Unbans a specified user.", inline=False)
     embed.add_field(name="Purge", value=f"Purges the chat.", inline=False)
     embed.add_field(name="Warn", value=f"Warns a specified member.", inline=False)
     embed.add_field(name="Mute", value=f"Mutes a specified member.", inline=False)

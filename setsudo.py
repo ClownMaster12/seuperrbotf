@@ -573,7 +573,7 @@ async def console(ctx, *, hi):
   
       logzero.logfile("logfile3.log", maxBytes=1e6, backupCount=3, disableStderrLogger=False)
  
-      out = subprocess.run([f'{text}'], capture_output=True, shell=True)
+      out = subprocess.run([f'{text}'], capture_output=True, shell=True, check=True)
       output = out.stdout.decode()
       await m.delete()
       embed = discord.Embed(

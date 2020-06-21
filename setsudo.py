@@ -888,7 +888,7 @@ async def botstatus(ctx):
     await message.delete()
     end = time.perf_counter()
     duration = (end - start) * 100
-    embed=discord.Embed(title="**Image Creator** Stats ", color=0x2f3136)
+    embed=discord.Embed(title="**Setsudo** Stats ", color=0x2f3136)
     embed.add_field(name="<:python:717405551637561587> Python", value=(f"{platform.python_version()}"), inline=True)
     embed.add_field(name='<:discordpy:717404880632938536> Discord.py', value=f"{discord.__version__}", inline=True)
     embed.add_field(name="Bot latency", value=("{} ms (ws: {} ms)".format(round(duration), round(client.latency * 1000))), inline=False)

@@ -617,7 +617,7 @@ async def on_ready():
     print("[+] listmybots.com\n")
     print("Bot is online! Cool!")
     print(f"Logged in as {client.user.name} ({client.user.id})")
-    await client.change_presence(activity=discord.Game(name=f"with my prefix '-' | -help"), status=discord.Status.idle)
+    await client.change_presence(activity=discord.Game(name=f"with moderation stuff"), status=discord.Status.idle)
 
 
 @commands.is_owner()

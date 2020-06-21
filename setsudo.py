@@ -605,16 +605,25 @@ async def on_ready():
     headers = {"Authorization": 'c16173ea368e0b322f98ebea9'}
     r = requests.post(url, data=payload, headers=headers)
     print("[+] Posted count to: \n[+] Cloudlist.xyz")
+    
     url = "https://wumpusbots.com/api/bot/718205517054476320/stats"
     payload = {"serverCount": f"{len(client.guilds)}", "shardCount": "1"}
     headers = {"authorization": 'XA-gTypCy2SoQfGOcb4LJo5pN5q'}
     r = requests.post(url, data=payload, headers=headers)
     print("[+] wumpusbots.com")
+    
+    url = f"https://discordbots.org/api/bots/718205517054476320/stats"
+    payload = {"server_count": f"{len(client.guilds)}", "shard_count": "1"}
+    headers = {"Authorization": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxODIwNTUxNzA1NDQ3NjMyMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTkyNzQ0NzM1fQ.ZwJ2-PvbXqy8n-_lAT-UEzs8RVGAu2mRnNeMW9s6wyg'}
+    r = requests.post(url, data=payload, headers=headers)
+    print("[+] top.gg")
+    
     url = "https://listmybots.com/api/bot/718205517054476320"
     payload = {"server_count": f"{len(client.guilds)}", "shardCount": "1"}
     headers = {"Authorization": 'b3d3763ba5e0cda10471fd5c3c04a001e68ca627423ad664e25c4775b648fec267d1f0152d5bcbb5c941ae46cd131d35c082f1a1318b4fd28130e8b2c30ab367'}
     r = requests.post(url, data=payload, headers=headers)
     print("[+] listmybots.com\n")
+    
     print("Bot is online! Cool!")
     print(f"Logged in as {client.user.name} ({client.user.id})")
     await client.change_presence(activity=discord.Game(name=f"with moderation stuff"), status=discord.Status.idle)

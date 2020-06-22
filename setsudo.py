@@ -857,13 +857,152 @@ async def fix_error(ctx, error):
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
 
+        
+        
+        
+@client.command(aliases=["si"])
+async def serverinfo(ctx):
+		"""Show various information about the server."""
 
+		guild = ctx.guild
+
+		desc = dict(
+			ID=guild.id,
+		)
+
+		e = discord.Embed(
+			title=guild.name,
+			description='\n'.join('**{}**: {}'.format(key, value) for key, value in desc.items()),
+			timestamp=guild.created_at
+		)
+
+		e.add_field(
+			name='Owner',
+			value=guild.owner.mention
+		)
+
+		e.add_field(
+			name='Region',
+			value=str(guild.region)
+		)
+
+		# CHANNELS
+
+		channels = {
+			discord.TextChannel: 0,
+			discord.VoiceChannel: 0,
+		}
+
+		for channel in guild.channels:
+			for channel_type in channels:
+				if isinstance(channel, channel_type):
+					channels[channel_type] += 1
+
+		channel_desc = '{} {}\n{} {}'.format(
+			'📨',
+			channels[discord.TextChannel],
+			'🔊',
+			channels[discord.VoiceChannel]
+		)
+
+		e.add_field(
+			name='Channels',
+			value=channel_desc
+		)
+    
+
+
+		# FEATURES
+
+		if guild.features:
+			e.add_field(
+				name='Features',
+				value='\n'.join('• ' + feature.replace('_', ' ').title() for feature in guild.features)
+			)
+
+    
+
+ 
+    
+
+		# MEMBERS
+
+		statuses = dict(
+			online=0,
+			idle=0,
+			dnd=0,
+			offline=0
+		)
+
+		total_online = 0
+
+		for member in guild.members:
+			status_str = str(member.status)
+			if status_str != "offline":
+				total_online += 1
+			statuses[status_str] += 1
+
+		member_desc = '{} {} {} {} {} {} {} {}'.format(
+			'<:online:714584789880930366>',
+			statuses['online'],
+			'<:idle:714584789880930426>',
+			statuses['idle'],
+			'<:offline:714584790019604541>',
+			statuses['dnd'],
+			'<:streaming:714584789981855774>',
+			statuses['offline']
+		)
+
+		e.add_field(
+			name='Members ({}/{})'.format(total_online, len(guild.members)),
+			value=f"{member_desc}", inline=False
+		)
+
+		# SERVER BOOST
+
+		boost_desc = '<:booster:717514418514034828> Level {} - {} Boosts'.format(guild.premium_tier, guild.premium_subscription_count)
+
+
+
+
+		e.add_field(
+			name='Server boost',
+			value=boost_desc
+		)
+   
+
+		e.set_thumbnail(url=guild.icon_url)
+		e.set_footer(text='Created')
+
+		await ctx.send(embed=e)  
+        
+        
+        
+        
+        
+        
+        
+      
+@client.command()
+async def userinfo(ctx, member: discord.Member = None):
+  if not member:
+    embed = discord.Embed(
+        title='Information', description='')
+    embed.add_field(name="> User Information", value=f"**❯**  Profile: {ctx.author.mention} `[{ctx.author.name}#{ctx.author.discriminator}]`\n**❯**  ID: `{ctx.author.id}`\n**❯**  Status: `{ctx.author.status}`\n**❯**  Bot?: {ctx.author.bot}\n**❯**  Joined Discord: `{ctx.author.created_at.strftime('%A, %B %d %Y @ %H:%M:%S %p')}`\n**❯**  Joined Guild: `{ctx.author.joined_at.strftime('%A, %B %d %Y @ %H:%M:%S %p')}`".replace('False', ':x:').replace('True', ':white_check_mark:'), inline=False)
+    embed.set_thumbnail(url=ctx.author.avatar_url)
+    await ctx.send(embed=embed) 
+  else:
+    embed = discord.Embed(
+        title='Information', description='')
+    embed.add_field(name="> User Information", value=f"**❯**  Profile: {member.mention} `[{member.name}#{member.discriminator}]`\n**❯**  ID: `{member.id}`\n**❯**  Status: `{member.status}`\n**❯**  Bot?: {member.bot}\n**❯**  Joined Discord: `{member.created_at.strftime('%A, %B %d %Y @ %H:%M:%S %p')}`\n**❯**  Joined Guild: `{member.joined_at.strftime('%A, %B %d %Y @ %H:%M:%S %p')}`".replace('False', ':x:').replace('True', ':white_check_mark:'), inline=False)
+    embed.set_thumbnail(url=member.avatar_url)
+    await ctx.send(embed=embed) 
 
 @client.command(aliases=["ci"])
 async def channelinfo(ctx, channel: discord.TextChannel = None):
   if not channel:
     embed = discord.Embed(
-      title='Channel information', description='', colour=discord.Colour.blue())
+      title='Channel Information', description='')
     
     embed.add_field(name="> Main Information", value=f"**❯**  Channel Name: `{ctx.channel.name}`\n**❯**  ID: `{ctx.channel.id}`\n**❯**  Created at: `{ctx.channel.created_at.strftime('%A, %B %d %Y @ %H:%M:%S %p')}`\n**❯** Category: `{ctx.channel.category}`\n**❯** NSFW?: `{ctx.channel.is_nsfw()}`\n**❯** Position: `{ctx.channel.position}` out of `{len(ctx.guild.channels)}`", inline=False)
 
@@ -871,7 +1010,7 @@ async def channelinfo(ctx, channel: discord.TextChannel = None):
     await ctx.send(embed=embed)
   else:
     embed = discord.Embed(
-      title='Channel information', description='', colour=discord.Colour.blue())
+      title='Channel Information', description='')
     
     embed.add_field(name="> Main Information", value=f"**❯**  Channel Name: `{channel.name}`\n**❯**  ID: `{channel.id}`\n**❯**  Created at: `{channel.created_at.strftime('%A, %B %d %Y @ %H:%M:%S %p')}`\n**❯** Category: `{channel.category}`\n**❯** NSFW?: `{channel.is_nsfw()}`\n**❯** Position: `{channel.position}` out of `{len(ctx.guild.channels)}`", inline=False)
 
@@ -886,7 +1025,9 @@ async def info(ctx):
   embed = discord.Embed(
     title=f'Developer Commands', description=f'', colour=0xcccccc)
 
-  embed.add_field(name="channelinfo", value=f"Gives info about a channel.", inline=False)
+  embed.add_field(name="channelinfo", value=f"Gives info about a channel.", inline=False)                
+  embed.add_field(name="userinfo", value=f"Gives info about a user.", inline=False)
+  embed.add_field(name="serverinfo", value=f"Gives info about the server.", inline=False)
 
   await ctx.send(embed=embed)               
 

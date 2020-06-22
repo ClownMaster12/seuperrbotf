@@ -468,6 +468,30 @@ async def unmute(ctx, member: discord.Member=None):
 
       msg = await ctx.send(embed = embed)
 
+	
+	
+@client.command()
+async def aqua(ctx: commands.Context):
+      embed = discord.Embed(title="Please wait..")
+      m = await ctx.send(embed=embed)
+      time.sleep(0)
+      try:
+
+        r = requests.get(f'https://api.itsaqua.net/')
+        j = r.json()
+        
+        embed = discord.Embed(title=f"Aqua Information")
+        embed.add_field(name="Listeners", value=f"Total: `{j['station']['mounts'][0]['listeners']['total']}`\nUnique: `{j['station']['mounts'][0]['listeners']['unique']}`\nCurrent: `{j['station']['mounts'][0]['listeners']['current']}`", inline=False)
+        embed.add_field(name="Now Playing", value=f'{j["now_playing"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}]`'.replace("0:00:00", f'{j["live"]["streamer_name"]} is Live'), inline=False)
+        embed.add_field(name="Up Next", value=f'{j["playing_next"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["playing_next"]["duration"]))}]`', inline=False)
+
+        await m.edit(embed=embed)
+      except Exception as e:
+        embed = discord.Embed(title=f"Error: `{e}`")
+        await m.edit(embed=embed)	
+	
+	
+
 @unmute.error
 async def unmute_error(ctx, error):
     if isinstance(error, commands.CheckFailure):

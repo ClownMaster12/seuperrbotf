@@ -886,7 +886,7 @@ async def info(ctx):
   embed = discord.Embed(
     title=f'Developer Commands', description=f'', colour=0xcccccc)
 
-  embed.add_field(name="channelinfo", value=f"Fixes the `Pull` command.", inline=False)
+  embed.add_field(name="channelinfo", value=f"Gives info about a channel.", inline=False)
 
   await ctx.send(embed=embed)               
 

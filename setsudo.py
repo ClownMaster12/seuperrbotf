@@ -1104,7 +1104,6 @@ async def useful(ctx):
     embed.add_field(name="Stats", value=f"Show information about the bot.", inline=False)
     embed.add_field(name="Setprefix", value=f"Changes the bots prefix.", inline=False)
     embed.add_field(name="Password", value=f"Generates a random password.", inline=False)
-    embed.add_field(name="System", value=f"Setsudo's system status.", inline=False)
     await ctx.send(embed=embed)
 
 @client.command()
@@ -1180,42 +1179,7 @@ async def _eval_error(ctx, error):
         await msg.add_reaction("❌")
 
         
-        
-import psutil
-import platform
-import cpuinfo
 
-
-
-@client.command()
-async def system(ctx):
-        boot_time_timestamp = psutil.boot_time()
-        bt = datetime.fromtimestamp(boot_time_timestamp)
-        content = discord.Embed(
-            title="",
-            colour=int("5dadec", 16),
-            description="Grabbing System Info..",
-        )
-        m = await ctx.send(embed=content)
-        time.sleep(0)
-        system_uptime = time.time() - psutil.boot_time()
-        mem = psutil.virtual_memory()
-        pid = os.getpid()
-        memory_use = psutil.Process(pid).memory_info()[0]
-
-        data = [
-            ("CPU Usage:", f"{psutil.cpu_percent()}%"),
-            ("RAM Usage:", f"{mem.percent}%"),
-            ("System Uptime:", f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}"),
-            ("CPU:", f"{cpuinfo.get_cpu_info()['brand']}")
-        ]
-
-        content = discord.Embed(
-            title=":computer: System status",
-            colour=int("5dadec", 16),
-            description="\n".join(f"**{x[0]}** {x[1]}" for x in data),
-        )
-        await m.edit(embed=content)
 
 client.loop.create_task(update_stats())
 client.run(env.TOKEN)

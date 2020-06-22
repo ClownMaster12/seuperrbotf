@@ -859,8 +859,36 @@ async def fix_error(ctx, error):
 
 
 
+@client.command(aliases=["ci"])
+async def channelinfo(ctx, channel: discord.TextChannel = None):
+  if not channel:
+    embed = discord.Embed(
+      title='Channel information', description='', colour=discord.Colour.blue())
+    
+    embed.add_field(name="> Main Information", value=f"**❯**  Channel Name: `{ctx.channel.name}`\n**❯**  ID: `{ctx.channel.id}`\n**❯**  Created at: `{ctx.channel.created_at.strftime('%A, %B %d %Y @ %H:%M:%S %p')}`\n**❯** Category: `{ctx.channel.category}`\n**❯** NSFW?: `{ctx.channel.is_nsfw()}`\n**❯** Position: `{ctx.channel.position}` out of `{len(ctx.guild.channels)}`", inline=False)
 
 
+    await ctx.send(embed=embed)
+  else:
+    embed = discord.Embed(
+      title='Channel information', description='', colour=discord.Colour.blue())
+    
+    embed.add_field(name="> Main Information", value=f"**❯**  Channel Name: `{channel.name}`\n**❯**  ID: `{channel.id}`\n**❯**  Created at: `{channel.created_at.strftime('%A, %B %d %Y @ %H:%M:%S %p')}`\n**❯** Category: `{channel.category}`\n**❯** NSFW?: `{channel.is_nsfw()}`\n**❯** Position: `{channel.position}` out of `{len(ctx.guild.channels)}`", inline=False)
+
+
+    await ctx.send(embed=embed)
+
+                    
+                    
+@client.command()
+async def info(ctx):
+  """Shows this message."""
+  embed = discord.Embed(
+    title=f'Developer Commands', description=f'', colour=0xcccccc)
+
+  embed.add_field(name="channelinfo", value=f"Fixes the `Pull` command.", inline=False)
+
+  await ctx.send(embed=embed)               
 
 
 @client.command()
@@ -941,6 +969,7 @@ async def help(ctx):
 
   embed.add_field(name=f"{ctx.prefix}`moderation`".replace("<@!718205517054476320> ", "-"), value=f"Shows moderation commands.", inline=False)
   embed.add_field(name=f"{ctx.prefix}`useful`".replace("<@!718205517054476320> ", "-"), value=f"Shows useful commands", inline=False)
+  embed.add_field(name=f"{ctx.prefix}`info`".replace("<@!718205517054476320> ", "-"), value=f"Shows info commands.", inline=False)
   embed.add_field(name=f"{ctx.prefix}`dev`".replace("<@!718205517054476320> ", "-"), value=f"Shows developer commands.", inline=False)
 
   await ctx.send(embed=embed)

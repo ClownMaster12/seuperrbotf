@@ -949,7 +949,7 @@ async def serverinfo(ctx):
 			statuses['idle'],
 			'<:offline:714584790019604541>',
 			statuses['dnd'],
-			'<:streaming:714584789981855774>',
+			'◾',
 			statuses['offline']
 		)
 

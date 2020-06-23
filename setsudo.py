@@ -579,7 +579,7 @@ async def aqua(ctx: commands.Context):
         j = r.json()
 
 
-        dj = f'{j["live"]["streamer_name"]}'.replace("", "AutoDJ")
+        dj = f'{j["live"]["streamer_name"]}'
         
 
 

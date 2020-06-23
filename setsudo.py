@@ -291,6 +291,60 @@ async def mutebroken(ctx):
     embed.set_footer(text="If this didn't work you can type '-bug [text]' to report a bug")
     msg = await ctx.send(embed = embed)
 
+
+
+
+
+@client.command()
+async def ghstatus(ctx):
+      embed = discord.Embed(title="Please wait..")
+      m = await ctx.send(embed=embed)
+      time.sleep(0)
+      await m.delete()
+      try:
+
+        r = requests.get(f'https://kctbh9vrtdwd.statuspage.io/api/v2/status.json')
+        j = r.json()
+  
+        b = requests.get(f'https://kctbh9vrtdwd.statuspage.io/api/v2/components.json')
+        k = b.json()
+  
+        n = requests.get(f'https://kctbh9vrtdwd.statuspage.io/api/v2/incidents/unresolved.json')
+        m = n.json()
+  
+    
+
+
+
+
+        embed = discord.Embed(title=f"")
+        embed.add_field(name="Github Status", value=f"`{j['status']['description']}`", inline=False)
+        embed.add_field(name="API Status", value=f"`{k['components'][0]['status']}`".replace("operational", "Operational"), inline=False) 
+        embed.add_field(name="Incidents", value=f"`{m['incidents']}`".replace("[]", "None"), inline=False) 
+
+        await ctx.send(embed=embed)
+
+
+
+
+
+
+
+
+
+
+        
+
+
+        
+      except Exception as e:
+        embed = discord.Embed(title=f"Error: `{e}`")
+        await m.edit(embed=embed)
+
+
+
+
+
 @client.command()
 async def dstatus(ctx):
       embed = discord.Embed(title="Please wait..")
@@ -1149,6 +1203,7 @@ async def useful(ctx):
     embed.add_field(name="Setprefix", value=f"Changes the bots prefix.", inline=False)
     embed.add_field(name="Password", value=f"Generates a random password.", inline=False)
     embed.add_field(name="Dstatus", value=f"Shows the status of discord.", inline=False)
+    embed.add_field(name="Ghstatus", value=f"Shows the status of github.", inline=False)
     await ctx.send(embed=embed)
 
 @client.command()

@@ -222,7 +222,7 @@ async def find_lyrics(ctx, *, query: str):
     try:
         results = await kclient.music.lyrics(query)
     except ksoftapi.NoResults:
-        print('No lyrics found for ' + query)
+        await ctx.send('No lyrics found for ' + query)
     else:
         first = results[0]
         embed = discord.Embed(

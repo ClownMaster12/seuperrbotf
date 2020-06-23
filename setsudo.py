@@ -212,6 +212,25 @@ async def on_guild_remove(guild):
     with open("prefixes.json", "w") as f:
         json.dump(prefixes, f, indent=4)
 
+	
+import ksoftapi
+
+kclient = ksoftapi.Client('71f3e5c7ee64ab017b3f7e002455c497cdd7abdc')
+
+@client.command(name="lyrics")
+async def find_lyrics(ctx, *, query: str):
+    try:
+        results = await kclient.music.lyrics(query)
+    except ksoftapi.NoResults:
+        print('No lyrics found for ' + query)
+    else:
+        first = results[0]
+        embed = discord.Embed(
+          title=f'', description=first.lyrics)
+        await ctx.send(embed=embed)	
+	
+	
+	
 
 @client.command(aliases=["setprefix"])
 async def changeprefix(ctx, prefix):

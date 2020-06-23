@@ -1008,7 +1008,7 @@ async def serverinfo(ctx):
 
 		e.add_field(
 			name='Owner',
-			value=guild.owner.mention
+			value=guild.owner
 		)
 
 		e.add_field(
@@ -1113,7 +1113,7 @@ async def serverinfo(ctx):
         
         
       
-@client.command()
+@client.command(aliases=["ui"])
 async def userinfo(ctx, member: discord.Member = None):
   if not member:
     embed = discord.Embed(

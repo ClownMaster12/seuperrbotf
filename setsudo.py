@@ -182,12 +182,104 @@ async def warn_error(ctx, error):
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
 
+	
+	
+def get_uuid(username):
+    try:
+        r = requests.get(f'https://api.minetools.eu/uuid/{username}')
+        j = r.json()
+        return j['id']
+    except Exception as e:
+        return None
+
+
+
+
+@client.command()
+async def server(ctx: commands.Context, ip):
+      try:
+        url = f'https://api.mcsrvstat.us/2/{ip}'
+        r = requests.get(url)
+        j = r.json()
+        embed: discord.Embed = discord.Embed(title=f'{ip}', color=0x2f3136)
+        jkeys = j.keys()
+        if 'version' in jkeys and len(j["version"]) > 1:
+            embed.title += f' ({j["version"]})'
+
+        embed.set_thumbnail(url=f'https://api.mcsrvstat.us/icon/{ip}')
+
+        if 'motd' in jkeys and 'clean' in j['motd'].keys():
+            embed.add_field(name='MOTD', value='\n'.join(j['motd']['clean']), inline=False)
+
+        embed.add_field(name='Online: ', value=j['online'], inline=True)
+
+        if 'players' in jkeys:
+            players = j['players']
+            print(players)
+            embed.add_field(name='Slots', value=f'{players["online"]}/{players["max"]}', inline=True)
+            if 'list' in players.keys():
+                embed.add_field(name='Players', value=f'{", ".join(players["list"])}', inline=True)
+        await ctx.send(embed=embed)
+      except:
+        await ctx.send("There was a error with the command.")
+
+
+
+
+@client.command(helpinfo='Shows MC account info, skin and username history')
+async def mcinfo(ctx, username='G3V'):
+  try:	
+    '''
+    Shows MC account info, skin and username history
+    '''
+    uuid = requests.get('https://api.mojang.com/users/profiles/minecraft/{}'
+                        .format(username)).json()['id']
+
+    url = json.loads(base64.b64decode(requests.get(
+        'https://sessionserver.mojang.com/session/minecraft/profile/{}'
+        .format(uuid)).json()['properties'][0]['value'])
+                     .decode('utf-8'))['textures']['SKIN']['url']
+    
+    names = requests.get('https://api.mojang.com/user/profiles/{}/names'
+                        .format(uuid)).json()
+    history = "\n"
+    for name in reversed(names):
+        history += name['name']+"\n"
+
+
+
+    
+    embed = discord.Embed(
+            title=f"Username: `{username}`", description=f'UUID: {uuid}', colour=discord.Colour.blue())
+
+    
+    embed.add_field(name="**Name History**:", value=f"```{history}```", inline=False)
+    embed.set_thumbnail(url=f'https://crafatar.com/renders/body/{get_uuid(username)}?overlay')
+        
+
+
+    await ctx.send(embed=embed)
+  except:
+    await ctx.send("There was a error.")
+		
+		
+
+
+
+
 
 
 @client.command()
 async def echo(ctx, *, text="Please include text."):
         await ctx.send(text.replace("@", "@ "))
 
+	
+	
+import base64
+import json
+from typing import Union
+from uuid import UUID
+	
 
 
 @client.event
@@ -1220,7 +1312,7 @@ async def channelinfo(ctx, channel: discord.TextChannel = None):
 async def info(ctx):
   """Shows this message."""
   embed = discord.Embed(
-    title=f'Developer Commands', description=f'', colour=0xcccccc)
+    title=f'Information Commands', description=f'', colour=0xcccccc)
 
   embed.add_field(name="channelinfo", value=f"Gives info about a channel.", inline=False)                
   embed.add_field(name="userinfo", value=f"Gives info about a user.", inline=False)
@@ -1282,6 +1374,21 @@ async def useful(ctx):
     embed.add_field(name="Ghstatus", value=f"Shows the status of github.", inline=False)
     await ctx.send(embed=embed)
 
+		    
+		    
+		    
+@client.command()
+async def minecraft(ctx):
+    embed = discord.Embed(
+    title=f'Minecraft Commands', description=f'', colour=0xcccccc)
+     
+ 
+    embed.add_field(name="Server", value=f"Shows info about a server ip.", inline=False)
+    embed.add_field(name="Mcinfo", value=f"Shows info about a user", inline=False)
+   
+    await ctx.send(embed=embed)
+		    
+		    
 @client.command()
 async def moderation(ctx):
     embed = discord.Embed(
@@ -1310,6 +1417,7 @@ async def help(ctx):
   embed.add_field(name=f"{ctx.prefix}`useful`".replace("<@!718205517054476320> ", "-"), value=f"Shows useful commands", inline=False)
   embed.add_field(name=f"{ctx.prefix}`info`".replace("<@!718205517054476320> ", "-"), value=f"Shows info commands.", inline=False)
   embed.add_field(name=f"{ctx.prefix}`dev`".replace("<@!718205517054476320> ", "-"), value=f"Shows developer commands.", inline=False)
+  embed.add_field(name=f"{ctx.prefix}`minecraft`".replace("<@!718205517054476320> ", "-"), value=f"Shows minecraft commands.", inline=False)
 
   await ctx.send(embed=embed)
 

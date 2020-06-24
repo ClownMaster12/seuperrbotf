@@ -1,4 +1,4 @@
-import random
+ import random
 import copy
 import datetime
 import random
@@ -646,7 +646,7 @@ async def aqua(ctx: commands.Context):
         j = r.json()
 
 
-        dj = f'AutoDJ{j["live"]["streamer_name"]}'.replace(f'AutoDJ{j["live"]["streamer_name"]}', 'AutoDJ')
+        dj = f'AutoDJ{j["live"]["streamer_name"]}'.replace(f'AutoDJ ', 'AutoDJ').replace(f'AutoDJ{j["live"]["streamer_name"]}', f'{j["live"]["streamer_name"]}')
         
 
 

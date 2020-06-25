@@ -715,7 +715,8 @@ async def unmute(ctx, member: discord.Member=None):
 
 
 @client.command()
-async def aqua(ctx: commands.Context):	
+async def 
+(ctx: commands.Context):	
 
       
       embed = discord.Embed(title="Please wait..")
@@ -751,10 +752,23 @@ async def aqua(ctx: commands.Context):
 
 
 			
-
+async def background_task():
+    await client.wait_until_ready()
+    r = requests.get(f'https://api.itsaqua.net/v1/all')
+    j = r.json()	
+    channel = client.get_channel(725811911291306095) # Insert channel ID here
+    while not client.is_closed():	
+                     	img = f"{j['images']['album']}"
 	
+	                embed = discord.Embed(title=f"Aqua Now Playing", description=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]}')
+	                embed.set_thumbnail(url=f"{img}")
+							  
+
+                        await channel.send(embed=embed)
+                        await asyncio.sleep(j["nowplaying"]["total"])	
 	
 
+					      
 @unmute.error
 async def unmute_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
@@ -1463,6 +1477,6 @@ async def _eval_error(ctx, error):
         
 
 
-		    
+client.loop.create_task(background_task())	    
 client.loop.create_task(update_stats())
 client.run(env.TOKEN)

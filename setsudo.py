@@ -755,7 +755,6 @@ async def aqua(ctx: commands.Context):
         embed.set_thumbnail(url=f"{img}")
         embed.add_field(name="> Listeners", value=f"Total: `{j['listeners']['total']}`\nUnique: `{j['listeners']['unique']}`\n", inline=False)
         embed.add_field(name="> Now Playing", value=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]} `[{str(datetime.timedelta(seconds=j["nowplaying"]["total"]))}]`'.replace("0:00:00", f'🔴 Live'), inline=False)
-
         embed.add_field(name="> DJ", value=f'{dj}'), inline=False)
 							   
 

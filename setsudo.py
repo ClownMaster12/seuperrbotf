@@ -744,7 +744,7 @@ async def aqua(ctx: commands.Context):
       try:	
 						
   					
-        r = requests.get(f'https://api.itsaqua.net/v1/')
+        r = requests.get(f'https://api.itsaqua.net/v1/all')
         j = r.json()	
 	
         dj = f"{j['presenter']['name']}"

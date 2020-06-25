@@ -731,13 +731,14 @@ async def unmute(ctx, member: discord.Member=None):
 
 @client.command()
 async def aqua(ctx: commands.Context):	
+			
+      r = requests.get(f'https://api.itsaqua.net/')
+      j = r.json()	
       embed = discord.Embed(title="Please wait..")
       m = await ctx.send(embed=embed)
       time.sleep(0)
       try:
-			
-	r = requests.get(f'https://api.itsaqua.net/')
-        j = r.json()	
+		
 			
         y = requests.get(f'https://api.itsaqua.net/v1/')
         h = y.json()	

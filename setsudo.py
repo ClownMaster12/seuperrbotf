@@ -756,16 +756,17 @@ async def background_task():
     j = r.json()	
     channel = client.get_channel(725811911291306095) # Insert channel ID here
     while not client.is_closed():
-			
-	img = f"{j['images']['album']}"
-			
-			
-	embed = discord.Embed(title=f"Aqua Now Playing", description=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]}')
-	embed.set_thumbnail(url=f"{img}")
+			d	
+                     	img = f"{j['images']['album']}"
+	
+	                embed = discord.Embed(title=f"Aqua Now Playing", description=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]}')
+	                embed.set_thumbnail(url=f"{img}")
 							  
 
-        await channel.send(embed=embed)
-        await asyncio.sleep(j["nowplaying"]["total"])	
+                        await channel.send(embed=embed)
+                        await asyncio.sleep(j["nowplaying"]["total"])	
+			
+
 	
 	
 
@@ -1476,6 +1477,6 @@ async def _eval_error(ctx, error):
 
         
 
-
+client.loop.create_task(background_task())
 client.loop.create_task(update_stats())
 client.run(env.TOKEN)

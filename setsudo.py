@@ -737,25 +737,24 @@ async def aqua(ctx: commands.Context):
       m = await ctx.send(embed=embed)
       time.sleep(0)
 			
-			
-					
-      r = requests.get(f'https://api.itsaqua.net/')
-      j = r.json()	
 		
-      y = requests.get(f'https://api.itsaqua.net/v1/')
-      h = y.json()
+
 		
-      try:		
-        dj = f"{h['presenter']['name']}"
+      try:	
+						
+  					
+        r = requests.get(f'https://api.itsaqua.net/v1/')
+        j = r.json()	
+	
+        dj = f"{j['presenter']['name']}"
         
-        img = f"{h['images']['album']}"
+        img = f"{j['images']['album']}"
 
 
         embed = discord.Embed(title=f"Aqua Information", url="https://live.itsaqua.net/")
         embed.set_thumbnail(url=f"{img}")
         embed.add_field(name="> Listeners", value=f"Total: `{j['listeners']['total']}`\nUnique: `{j['listeners']['unique']}`\n", inline=False)
-        embed.add_field(name="> Now Playing", value=f'{j["now_playing"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}]`'.replace("0:00:00", f'🔴 Live'), inline=False)
-        embed.add_field(name="> Up Next", value=f'{j["playing_next"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["playing_next"]["duration"]))}]`', inline=False)
+        embed.add_field(name="> Now Playing", value=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]} `[{str(datetime.timedelta(seconds=j["nowplaying"]["total"]))}]`'.replace("0:00:00", f'🔴 Live'), inline=False)
 
         embed.add_field(name="> DJ", value=f'{dj}'), inline=False)
 							   

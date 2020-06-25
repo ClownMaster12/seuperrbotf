@@ -715,8 +715,7 @@ async def background_task():
     channel = client.get_channel(725811911291306095) # Insert channel ID here
     while not client.is_closed():
               try:
-                r = requests.get(f'https://api.its
-				 .net/v1/all')
+                r = requests.get(f'https://api.itsaqua.net/v1/all')
                 j = r.json()
                 embed=discord.Embed(title=f"Aqua Now Playing", description=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]}')
                 embed.set_thumbnail(url=f"{j['images']['album']}")

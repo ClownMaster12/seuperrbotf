@@ -356,7 +356,6 @@ def seconds_elapsed():
 
 
 
-
 @commands.has_permissions(manage_messages=True)
 @client.command()
 async def purge(ctx, amount=1000):
@@ -751,7 +750,22 @@ async def aqua(ctx: commands.Context):
         await m.edit(embed=embed)
 
 
-		
+async def background_task():
+    await client.wait_until_ready()
+    r = requests.get(f'https://api.itsaqua.net/v1/all')
+    j = r.json()	
+    channel = client.get_channel(725811911291306095) # Insert channel ID here
+    while not client.is_closed():
+			
+	img = f"{j['images']['album']}"
+			
+			
+	embed = discord.Embed(title=f"Aqua Now Playing", description=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]}')
+	embed.set_thumbnail(url=f"{img}")
+							  
+
+        await channel.send(embed=embed)
+        await asyncio.sleep(j["nowplaying"]["total"])	
 	
 	
 

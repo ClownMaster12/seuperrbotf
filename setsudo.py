@@ -757,7 +757,7 @@ async def background_task():
     j = r.json()	
     channel = client.get_channel(725811911291306095) # Insert channel ID here
     while not client.is_closed():
-	embed = discord.Embed(title=f"Aqua Now Playing", description=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]}')
+	embe =discord.Embed(title=f"Aqua Now Playing", description=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]}')
 	embed.set_thumbnail(url=f"{j['images']['album']}")
         await channel.send(embed=embed)
         await asyncio.sleep(j["nowplaying"]["total"])	

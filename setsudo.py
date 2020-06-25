@@ -718,7 +718,7 @@ async def background_task():
                 r = requests.get(f'https://api.itsaqua.net/v1/all')
                 j = r.json()
                 embed=discord.Embed(title=f"Aqua Now Playing", description=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]}')
-                embed.set_thumbnail(url=f"{j['images']['album']}")
+                embed.set_image(url=f"{j['images']['album']}")
                 await channel.send(embed=embed)
                 await asyncio.sleep(j["nowplaying"]["total"])
               except:

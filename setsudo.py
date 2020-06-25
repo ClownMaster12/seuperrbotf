@@ -727,6 +727,7 @@ async def unmute(ctx, member: discord.Member=None):
 	
 	
 
+
 @client.command()
 async def aqua(ctx: commands.Context):
       r = requests.get(f'https://api.itsaqua.net/')
@@ -757,6 +758,8 @@ async def aqua(ctx: commands.Context):
       except Exception as e:
         embed = discord.Embed(title=f"Error: `{e}`")
         await m.edit(embed=embed)
+
+
 		
 	
 	

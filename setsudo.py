@@ -737,8 +737,8 @@ async def aqua(ctx: commands.Context):
         r = requests.get(f'https://api.itsaqua.net/')
         j = r.json()
 			
-	u = requests.get(f'https://api.itsaqua.net/v1/all')
-        h = u.json()
+	y = requests.get(f'https://api.itsaqua.net/v1/all/')
+        h = y.json()
 
 
         dj = f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}'.replace("0:00:00", f'{j["live"]["streamer_name"]}')

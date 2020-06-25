@@ -739,24 +739,25 @@ async def aqua(ctx: commands.Context):
       m = await ctx.send(embed=embed)
       time.sleep(0)
       try:
-          dj = f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}'.replace("0:00:00", f'{j["live"]["streamer_name"]}')
+        dj = f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}'.replace("0:00:00", f'{j["live"]["streamer_name"]}')
         
-          img = f"{h['images']['album']}"
+        img = f"{h['images']['album']}"
 
 
-          embed = discord.Embed(title=f"Aqua Information", url="https://live.itsaqua.net/")
-          embed.add_field(name="> Listeners", value=f"Total: `{j['listeners']['total']}`\nUnique: `{j['listeners']['unique']}`\n", inline=False)
-          embed.add_field(name="> Now Playing", value=f'{j["now_playing"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}]`'.replace("0:00:00", f'🔴 Live'), inline=False)
-          embed.add_field(name="> Up Next", value=f'{j["playing_next"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["playing_next"]["duration"]))}]`', inline=False)
-	        embed.set_thumbnail(url = f"{img}")
-          embed.add_field(name="> DJ", value=f'{dj}'.replace(f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}', f'AutoDJ'), inline=False)
+        embed = discord.Embed(title=f"Aqua Information", url="https://live.itsaqua.net/")
+        embed.add_field(name="> Listeners", value=f"Total: `{j['listeners']['total']}`\nUnique: `{j['listeners']['unique']}`\n", inline=False)
+        embed.add_field(name="> Now Playing", value=f'{j["now_playing"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}]`'.replace("0:00:00", f'🔴 Live'), inline=False)
+        embed.add_field(name="> Up Next", value=f'{j["playing_next"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["playing_next"]["duration"]))}]`', inline=False)
+	    embed.set_thumbnail(url = f"{img}")
+        embed.add_field(name="> DJ", value=f'{dj}'.replace(f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}', f'AutoDJ'), inline=False)
 							   
 
 
         await m.edit(embed=embed)
       except Exception as e:
         embed = discord.Embed(title=f"Error: `{e}`")
-        await m.edit(embed=embed)		
+        await m.edit(embed=embed)
+		
 	
 	
 

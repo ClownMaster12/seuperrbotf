@@ -715,8 +715,7 @@ async def unmute(ctx, member: discord.Member=None):
 
 
 @client.command()
-async def 
-(ctx: commands.Context):	
+async def aqua(ctx: commands.Context):	
 
       
       embed = discord.Embed(title="Please wait..")

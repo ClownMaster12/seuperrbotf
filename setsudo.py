@@ -735,8 +735,7 @@ async def aqua(ctx: commands.Context):
       try:
 
         r = requests.get(f'https://api.itsaqua.net/')
-        j = r.json()
-			
+        j = r.json()		
 	y = requests.get(f'https://api.itsaqua.net/v1/all/')
         h = y.json()
 

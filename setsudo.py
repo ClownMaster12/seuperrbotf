@@ -754,7 +754,7 @@ async def aqua(ctx: commands.Context):
         embed.add_field(name="> Up Next", value=f'{j["playing_next"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["playing_next"]["duration"]))}]`', inline=False)
         embed.add_field(name="> DJ", value=f'{dj}'.replace(f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}', f'AutoDJ'), inline=False)
 							   
-	embed.set_thumbnail(url=img)
+	embed.set_thumbnail(url=f"{img}" )
 
 
         await m.edit(embed=embed)

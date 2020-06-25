@@ -728,6 +728,7 @@ async def unmute(ctx, member: discord.Member=None):
 	
 
 
+
 @client.command()
 async def aqua(ctx: commands.Context):
       r = requests.get(f'https://api.itsaqua.net/')
@@ -746,10 +747,11 @@ async def aqua(ctx: commands.Context):
 
 
         embed = discord.Embed(title=f"Aqua Information", url="https://live.itsaqua.net/")
+        embed.set_thumbnail(url=f"{img}")
         embed.add_field(name="> Listeners", value=f"Total: `{j['listeners']['total']}`\nUnique: `{j['listeners']['unique']}`\n", inline=False)
         embed.add_field(name="> Now Playing", value=f'{j["now_playing"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}]`'.replace("0:00:00", f'🔴 Live'), inline=False)
         embed.add_field(name="> Up Next", value=f'{j["playing_next"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["playing_next"]["duration"]))}]`', inline=False)
-	    embed.set_thumbnail(url = f"{img}")
+
         embed.add_field(name="> DJ", value=f'{dj}'.replace(f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}', f'AutoDJ'), inline=False)
 							   
 

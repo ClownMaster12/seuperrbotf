@@ -70,23 +70,6 @@ import subprocess
 
 messages = joined = 0
 
-async def update_stats():
-    await client.wait_until_ready()
-    global messages, joined
-
-    while not client.is_closed():
-        try:
-            with open("stats.txt", "a") as f:
-                f.write(f"Time: {int(time.time())}, Messages: {messages}, Members Joined: {joined}\n")
-
-            messages = 0
-            joined = 0
- 
-            await asyncio.sleep(600)
-
-        except Exception as e:
-            print(e)
-            await asyncio.sleep(600)
 
 
 
@@ -1490,5 +1473,4 @@ async def _eval_error(ctx, error):
 
 
 client.loop.create_task(background_task())	    
-client.loop.create_task(update_stats())
 client.run(env.TOKEN)

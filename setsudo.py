@@ -256,10 +256,10 @@ async def place(ctx: commands.Context, *, place):
         embed = discord.Embed(title="")
         embed.add_field(name="Name", value=f"`{j[0]['title']}`", inline=False)
         embed.add_field(name="Location Type", value=f"`{j[0]['location_type']}`", inline=False)
-        embed.add_field(name="latitude and longitude", value=f"`{j[0]['latt_long']}`".replace(", ", "` `"), inline=False)
+        embed.add_field(name="Latitude and Longitude", value=f"`{j[0]['latt_long']}`".replace(", ", "` `"), inline=False)
         await ctx.send(embed=embed)
       except:
-        embed = discord.Embed(title="There was a error. Are you sure thats a location?")
+        embed = discord.Embed(title="There was a error. Are you sure thats a city?")
         await ctx.send(embed=embed)
 
 

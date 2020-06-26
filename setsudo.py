@@ -265,6 +265,19 @@ async def mcinfo(ctx, username='G3V'):
 		
 
 
+@client.command()
+async def place(ctx: commands.Context, *, place):
+      try:
+        r = requests.get(f'https://www.metaweather.com//api/location/search/?query={place}')
+        j = r.json()
+        embed = discord.Embed(title="")
+        embed.add_field(name="Name", value=f"`{j[0]['title']}`", inline=False)
+        embed.add_field(name="Location Type", value=f"`{j[0]['location_type']}`", inline=False)
+        embed.add_field(name="latitude and longitude", value=f"`{j[0]['latt_long']}`".replace(", ", "` `"), inline=False)
+        await ctx.send(embed=embed)
+      except:
+        embed = discord.Embed(title="There was a error. Are you sure thats a location?")
+        await ctx.send(embed=embed)
 
 
 
@@ -1383,8 +1396,8 @@ async def useful(ctx):
     embed.add_field(name="Password", value=f"Generates a random password.", inline=False)
     embed.add_field(name="Dstatus", value=f"Shows the status of discord.", inline=False)
     embed.add_field(name="Ghstatus", value=f"Shows the status of github.", inline=False)
+    embed.add_field(name="Place", value=f"Information about a place.", inline=False)
     await ctx.send(embed=embed)
-
 		    
 		    
 		    

@@ -721,7 +721,40 @@ async def background_task():
                 embed=discord.Embed(title=f"Error Getting Current Track", description=f'')
                 await channel.send(embed=embed)
                 
+@client.command()
+async def nlradio(ctx: commands.Context):	
 
+      
+      embed = discord.Embed(title="Please wait..")
+      m = await ctx.send(embed=embed)
+      time.sleep(0)
+			
+		
+
+      try:	
+						
+  					
+        r = requests.get(f'http://tafinaproductions.xyz/api/nowplaying/2')
+        j = r.json()	
+	
+        dj = f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}'.replace("0:00:00", f"{j['live']['streamer_name']}")
+        img = f'{j["now_playing"]["song"]["art"]}'
+
+
+        embed = discord.Embed(title=f"Now Playing")
+        embed.set_thumbnail(url=f"{img}")
+        embed.add_field(name="> Listeners", value=f"Total: `{j['listeners']['total']}`\nUnique: `{j['listeners']['unique']}`\n", inline=False)
+        embed.add_field(name="> Now Playing", value=f'{j["now_playing"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}]`'.replace("0:00:00", f'🔴 Live'), inline=False)
+        embed.add_field(name="> DJ", value=dj.replace(f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}', "AutoDJ"), inline=False)
+							   
+
+
+        await m.edit(embed=embed)
+      except Exception as e:
+        embed = discord.Embed(title=f"Error: `{e}`")
+        await m.edit(embed=embed)		
+				
+				
 
 @client.command()
 async def aqua(ctx: commands.Context):	

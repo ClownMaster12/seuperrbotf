@@ -734,7 +734,7 @@ async def nlr(ctx: commands.Context):
       try:	
 						
   					
-        r = requests.get(f'http://tafinaproductions.xyz/api/nowplaying/2')
+        r = requests.get(f'http://nlradio.xyz/api/nowplaying/2')
         j = r.json()	
 	
         dj = f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}'.replace("0:00:00", f"{j['live']['streamer_name']}")

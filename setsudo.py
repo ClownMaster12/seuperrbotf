@@ -382,26 +382,8 @@ async def mutebroken(ctx):
     embed.set_footer(text="If this didn't work you can type '-bug [text]' to report a bug")
     msg = await ctx.send(embed = embed)
 
-import googletrans
-from googletrans import Translator
 			
-			
-translator = Translator()
 
-
-@client.command()
-async def translate(ctx, *, translation):
-  try:
-    translator = Translator()
-    result = translator.translate(translation)
-
-    embed = discord.Embed(title=f"", description=f"")
-    embed.add_field(name=f"Translation | :flag_{result.src}:".replace(":flag_en:", ":england:"), value=f"```{result.text}```", inline=False)
-
-    await ctx.send(embed=embed)
-  except Exception as e:
-    embed = discord.Embed(title=f"Error: `{e}`")
-    await ctx.send(embed=embed)
 			
 			
 

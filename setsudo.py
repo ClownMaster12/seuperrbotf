@@ -396,7 +396,7 @@ async def translate(ctx, *, translation):
     result = translator.translate(translation)
 
     embed = discord.Embed(title=f"", description=f"")
-    embed.add_field(name=f"Translation | :flag_{result.src}:", value=f"```{result.text}```", inline=False)
+    embed.add_field(name=f"Translation | :flag_{result.src}:".replace(":flag_en:", ":england:"), value=f"```{result.text}```", inline=False)
 
     await ctx.send(embed=embed)
   except Exception as e:

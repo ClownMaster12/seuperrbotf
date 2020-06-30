@@ -744,7 +744,7 @@ async def nlr(ctx: commands.Context):
         img = f'{j["now_playing"]["song"]["art"]}'
 
 
-        embed = discord.Embed(title=f"Next Level Radio Information", url="http://nlradio.xyz/")
+        embed = discord.Embed(title=f"Next Level Radio Information")
         embed.set_thumbnail(url=f"{img}")
         embed.add_field(name="> Listeners", value=f"Total: `{j['listeners']['total']}`\nUnique: `{j['listeners']['unique']}`\n", inline=False)
         embed.add_field(name="> Now Playing", value=f'{j["now_playing"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}]`'.replace("0:00:00", f"{j['live']['streamer_name']} is Live"), inline=False)

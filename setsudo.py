@@ -1483,9 +1483,5 @@ async def _eval_error(ctx, error):
 
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
-
-        
-
-
-client.loop.create_task(background_task())	    
+	    
 client.run(env.TOKEN)

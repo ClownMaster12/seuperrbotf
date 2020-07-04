@@ -743,40 +743,7 @@ async def nlr(ctx: commands.Context):
 				
 				
 
-@client.command()
-async def aqua(ctx: commands.Context):	
 
-      
-      embed = discord.Embed(title="Please wait..")
-      m = await ctx.send(embed=embed)
-      time.sleep(0)
-			
-		
-
-		
-      try:	
-						
-  					
-        r = requests.get(f'https://api.itsaqua.net/v1/all')
-        j = r.json()	
-	
-        dj = f"{j['presenter']['name']}"
-        
-        img = f"{j['images']['album']}"
-
-
-        embed = discord.Embed(title=f"Aqua Information", url="https://live.itsaqua.net/")
-        embed.set_thumbnail(url=f"{img}")
-        embed.add_field(name="> Listeners", value=f"Total: `{j['listeners']['total']}`\nUnique: `{j['listeners']['unique']}`\n", inline=False)
-        embed.add_field(name="> Now Playing", value=f'{j["nowplaying"]["title"]} - {j["nowplaying"]["artist"]} `[{str(datetime.timedelta(seconds=j["nowplaying"]["total"]))}]`'.replace("0:00:00", f'🔴 Live'), inline=False)
-        embed.add_field(name="> DJ", value=dj, inline=False)
-							   
-
-
-        await m.edit(embed=embed)
-      except Exception as e:
-        embed = discord.Embed(title=f"Error: `{e}`")
-        await m.edit(embed=embed)
 
 
 			

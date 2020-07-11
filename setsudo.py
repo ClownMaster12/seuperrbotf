@@ -768,10 +768,27 @@ async def unmute_error(ctx, error):
 
 
 
+import googletrans
+from googletrans import Translator
 
 
 
+translator = Translator()
 
+@commands.guild_only()
+@client.command()
+async def translate(ctx, *, translation):
+  try:
+    translator = Translator()
+    result = translator.translate(translation)
+
+    embed = discord.Embed(title=f"", description=f"")
+    embed.add_field(name=f"Translation | :flag_{result.src}:".replace(":flag_en:", ":england:"), value=f"```{result.text}```", inline=False)
+
+    await ctx.send(embed=embed)
+  except Exception as e:
+    embed = discord.Embed(title=f"Error: `{e}`")
+    await ctx.send(embed=embed)
 
 
 import subprocess
@@ -1363,9 +1380,46 @@ async def useful(ctx):
     embed.add_field(name="Dstatus", value=f"Shows the status of discord.", inline=False)
     embed.add_field(name="Ghstatus", value=f"Shows the status of github.", inline=False)
     embed.add_field(name="Place", value=f"Information about a place.", inline=False)
+    embed.add_field(name="Translate", value=f"Translates text using google translate.", inline=False)
+    embed.add_field(name="covid", value=f"Stats about covid-19.", inline=False)
     await ctx.send(embed=embed)
+		 
 		    
-		    
+@client.command(aliases=["coronavirus", "corona","covid"])
+async def cov(ctx: commands.Context):	
+
+      
+      embed = discord.Embed(title="Please wait..")
+      m = await ctx.send(embed=embed)
+      time.sleep(0)
+			
+		
+
+      try:	
+						
+  					
+        r = requests.get(f'https://api.covid19api.com/summary')
+        j = r.json()	
+	
+        total = "{:,}".format(j['Global']['TotalConfirmed'])
+        TotalD = "{:,}".format(j['Global']['TotalDeaths'])
+        TotalR = "{:,}".format(j['Global']['TotalRecovered'])
+        
+        new = "{:,}".format(j['Global']['NewConfirmed'])
+        newD = "{:,}".format(j['Global']['NewDeaths'])
+        NewR = "{:,}".format(j['Global']['NewRecovered'])
+
+
+        embed = discord.Embed(title=f"Covid-19 Stats")
+        embed.add_field(name="Total", value=f"Total Confirmed: `{total}`\nTotal Deaths: `{TotalD}`\nTotal Recovered: `{TotalR}`", inline=False)
+        embed.add_field(name="New", value=f"New Confirmed: `{new}`\nNew Deaths: `{newD}`\nNew Recovered: `{NewR}`", inline=False)
+							   
+
+
+        await m.edit(embed=embed)
+      except Exception as e:
+        embed = discord.Embed(title=f"Error: `{e}`")
+        await m.edit(embed=embed)
 		    
 @client.command()
 async def minecraft(ctx):

@@ -1453,17 +1453,21 @@ async def moderation(ctx):
 
 		    
 		    
-async def my_background_task():
+		    
+		    
+async def background_task():
     await client.wait_until_ready()
     url = "https://discordbots.org/api/bots/718205517054476320/stats"
-    while not client.is_closed:
-        payload = {"server_count": f"{len(client.guilds)}", "shard_count": "1"}
-        headers = {"Authorization": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxODIwNTUxNzA1NDQ3NjMyMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTkyODIyOTg5fQ.okYwlEcS3ZIqnCVayf-RQWOe0e1vnxVmE8mTHLJ4f_k'}
-        r = requests.post(url, data=payload, headers=headers)
-        print("Guild Count Posted")
-        await asyncio.sleep(600) # task runs every 60 seconds
-		    
-		    
+    while not client.is_closed():
+              try:
+                payload = {"server_count": f"{len(client.guilds)}", "shard_count": "1"}
+                headers = {"Authorization": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxODIwNTUxNzA1NDQ3NjMyMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTkyODIyOTg5fQ.okYwlEcS3ZIqnCVayf-RQWOe0e1vnxVmE8mTHLJ4f_k'}
+                r = requests.post(url, data=payload, headers=headers)
+                print("Guild Count Posted")
+                await asyncio.sleep(600) # task runs every 60 seconds
+              except:
+                print("Error! Retrying in 60 seconds.")
+                await asyncio.sleep(60)
 		    
 		    
 		    
@@ -1523,5 +1527,5 @@ async def _eval_error(ctx, error):
         await msg.add_reaction("❌")
 	    
 		    
-client.loop.create_task(my_background_task())
+client.loop.create_task(background_task())
 client.run(env.TOKEN)

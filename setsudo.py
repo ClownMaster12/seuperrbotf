@@ -276,8 +276,8 @@ from typing import Union
 from uuid import UUID
 	
 @client.command()
-async def owoify(ctx, *, owo):
-    text = owo(f"{owo}")
+async def owoify(ctx, *, pog):
+    text = owo(pog)
     await ctx.send(text)
 		
 

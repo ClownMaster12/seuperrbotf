@@ -9,10 +9,9 @@ import psutil
 import platform
 import cpuinfo
 import time
-
 import secrets
 import sys, traceback
-
+import owotrans
 import sys, traceback
 import random
 import asyncio
@@ -276,7 +275,11 @@ import json
 from typing import Union
 from uuid import UUID
 	
-
+@client.command()
+async def owoify(ctx, *, owo):
+    text = owo(f"{owo}")
+    await ctx.send(text)
+		
 
 @client.event
 async def on_guild_join(guild):

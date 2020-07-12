@@ -707,23 +707,37 @@ async def unmute(ctx, member: discord.Member=None):
 
       msg = await ctx.send(embed = embed)
 
-	
-                
 @client.command(aliases=["nlradio", "nextlr","nlevelr"])
 async def nlr(ctx: commands.Context):	
+  embed = discord.Embed(title="Please wait..")
+  m = await ctx.send(embed=embed)
+  await asyncio.sleep(1)
 
-      
-      embed = discord.Embed(title="Please wait..")
-      m = await ctx.send(embed=embed)
-      time.sleep(0)
-			
-		
-
-      try:	
-						
-  					
+  try:	
         r = requests.get(f'http://nlradio.xyz/api/nowplaying/2')
-        j = r.json()	
+        j = r.json()
+
+        song_progress = j["now_playing"]["elapsed"]
+        song_total = j["now_playing"]["duration"]
+
+
+
+        prog_bar_str = ''
+
+        percentage = 0.0
+
+        if j["now_playing"]["duration"] > 0:
+          percentage = j["now_playing"]["elapsed"] / j["now_playing"]["duration"]
+
+        progress_bar_length = 30
+        for i in range(progress_bar_length):
+          if (percentage < 1 / progress_bar_length * i):
+            prog_bar_str += '□'
+          else:
+            prog_bar_str += '■'
+    
+        progress_bar=prog_bar_str
+      
 	
         dj = f'{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}'.replace("0:00:00", f"{j['live']['streamer_name']}")
         img = f'{j["now_playing"]["song"]["art"]}'
@@ -731,16 +745,17 @@ async def nlr(ctx: commands.Context):
 
         embed = discord.Embed(title=f"Next Level Radio Information")
         embed.set_thumbnail(url=f"{img}")
-        embed.add_field(name="> Listeners", value=f"Total: `{j['listeners']['total']}`\nUnique: `{j['listeners']['unique']}`\n", inline=False)
-        embed.add_field(name="> Now Playing", value=f'{j["now_playing"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}]`'.replace("0:00:00", f"{j['live']['streamer_name']} is Live"), inline=False)
-        embed.add_field(name="> Up Next", value=f'{j["playing_next"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["playing_next"]["duration"]))}]`', inline=False)	
-							   
+        embed.add_field(name="> Listeners", value=f"Total: `{j['listeners']['total']}`\nUnique: `{j['listeners']['unique']}`", inline=False)
+        embed.add_field(name="> Now Playing", value=f'{j["now_playing"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}]`'.replace("0:00:00", f"{j['live']['streamer_name']} is Live").replace("[ is Live]", "[ERROR]"), inline=False)
+        embed.add_field(name="> Now Playing Progress", value=f'`{str(datetime.timedelta(seconds=j["now_playing"]["elapsed"]))} {progress_bar} {str(datetime.timedelta(seconds=j["now_playing"]["duration"]))}`', inline=False)
+	embed.add_field(name="> Up Next", value=f'{j["playing_next"]["song"]["text"]} `[{str(datetime.timedelta(seconds=j["playing_next"]["duration"]))}]`', inline=False)						   
 
 
         await m.edit(embed=embed)
-      except Exception as e:
+  except Exception as e:
         embed = discord.Embed(title=f"Error: `{e}`")
-        await m.edit(embed=embed)	
+        await m.edit(embed=embed)
+                
 				
 				
 

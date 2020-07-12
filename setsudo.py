@@ -1451,6 +1451,22 @@ async def moderation(ctx):
     embed.add_field(name="Roles", value=f"Lists all roles in the server.", inline=False)
     await ctx.send(embed=embed)
 
+		    
+		    
+async def my_background_task():
+    await client.wait_until_ready()
+    url = "https://discordbots.org/api/bots/718205517054476320/stats"
+    while not client.is_closed:
+        payload = {"server_count": f"{len(client.guilds)}", "shard_count": "1"}
+        headers = {"Authorization": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxODIwNTUxNzA1NDQ3NjMyMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTkyODIyOTg5fQ.okYwlEcS3ZIqnCVayf-RQWOe0e1vnxVmE8mTHLJ4f_k'}
+        r = requests.post(url, data=payload, headers=headers)
+        print("Guild Count Posted")
+        await asyncio.sleep(600) # task runs every 60 seconds
+		    
+		    
+		    
+		    
+		    
 
 @client.command()
 async def help(ctx):
@@ -1506,4 +1522,6 @@ async def _eval_error(ctx, error):
         msg = await ctx.send(embed = embed)
         await msg.add_reaction("❌")
 	    
+		    
+client.loop.create_task(my_background_task())
 client.run(env.TOKEN)

@@ -275,10 +275,13 @@ import json
 from typing import Union
 from uuid import UUID
 	
+
 @client.command()
-async def owoify(ctx, *, pog):
-    text = owoify(pog)
-    await ctx.send(text)
+async def owoify(ctx, *, text):
+        replacements = [("l", "w"), ("r", "w")]
+        for sel in replacements:
+            text = text.replace(sel[0], sel[1])
+        await ctx.send(f"{text} {random.choice(faces)}")
 		
 
 @client.event

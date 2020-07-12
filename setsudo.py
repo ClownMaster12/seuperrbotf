@@ -906,19 +906,19 @@ async def on_ready():
     payload = {"serverCount": f"{len(client.guilds)}", "shardCount": "1"}
     headers = {"authorization": 'XA-gTypCy2SoQfGOcb4LJo5pN5q'}
     r = requests.post(url, data=payload, headers=headers)
-    print("[+] wumpusbots.com")
+    print("[+] Wumpusbots.com")
     
-    url = f"https://discordbots.org/api/bots/718205517054476320/stats"
+    url = "https://discordbots.org/api/bots/718205517054476320/stats"
     payload = {"server_count": f"{len(client.guilds)}", "shard_count": "1"}
-    headers = {"Authorization": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxODIwNTUxNzA1NDQ3NjMyMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTkyNzQ0NzM1fQ.ZwJ2-PvbXqy8n-_lAT-UEzs8RVGAu2mRnNeMW9s6wyg'}
+    headers = {"Authorization": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxODIwNTUxNzA1NDQ3NjMyMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTkyODIyOTg5fQ.okYwlEcS3ZIqnCVayf-RQWOe0e1vnxVmE8mTHLJ4f_k'}
     r = requests.post(url, data=payload, headers=headers)
-    print("[+] top.gg")
+    print("[+] Top.gg\n")
     
     url = "https://listmybots.com/api/bot/718205517054476320"
     payload = {"server_count": f"{len(client.guilds)}", "shardCount": "1"}
     headers = {"Authorization": 'b3d3763ba5e0cda10471fd5c3c04a001e68ca627423ad664e25c4775b648fec267d1f0152d5bcbb5c941ae46cd131d35c082f1a1318b4fd28130e8b2c30ab367'}
     r = requests.post(url, data=payload, headers=headers)
-    print("[+] listmybots.com\n")
+    print("[+] Listmybots.com\n")
     
     print("Bot is online! Cool!")
     print(f"Logged in as {client.user.name} ({client.user.id})")
@@ -1452,8 +1452,7 @@ async def moderation(ctx):
     await ctx.send(embed=embed)
 
 		    
-		    
-		    
+
 		    
 async def background_task():
     await client.wait_until_ready()
@@ -1464,7 +1463,7 @@ async def background_task():
                 headers = {"Authorization": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxODIwNTUxNzA1NDQ3NjMyMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTkyODIyOTg5fQ.okYwlEcS3ZIqnCVayf-RQWOe0e1vnxVmE8mTHLJ4f_k'}
                 r = requests.post(url, data=payload, headers=headers)
                 print("Guild Count Posted")
-                await asyncio.sleep(600) # task runs every 60 seconds
+                await asyncio.sleep(300) # task runs every 60 seconds
               except:
                 print("Error! Retrying in 60 seconds.")
                 await asyncio.sleep(60)

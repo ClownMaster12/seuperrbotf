@@ -1463,7 +1463,7 @@ async def background_task():
                 headers = {"Authorization": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcxODIwNTUxNzA1NDQ3NjMyMCIsImJvdCI6dHJ1ZSwiaWF0IjoxNTkyODIyOTg5fQ.okYwlEcS3ZIqnCVayf-RQWOe0e1vnxVmE8mTHLJ4f_k'}
                 r = requests.post(url, data=payload, headers=headers)
                 print("Guild Count Posted")
-                await asyncio.sleep(300) # task runs every 60 seconds
+                await asyncio.sleep(325) # task runs every 60 seconds
               except:
                 print("Error! Retrying in 60 seconds.")
                 await asyncio.sleep(60)

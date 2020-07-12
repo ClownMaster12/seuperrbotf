@@ -11,7 +11,7 @@ import cpuinfo
 import time
 import secrets
 import sys, traceback
-import owotrans
+from owoify import owoify
 import sys, traceback
 import random
 import asyncio
@@ -277,7 +277,7 @@ from uuid import UUID
 	
 @client.command()
 async def owoify(ctx, *, pog):
-    text = owo(pog)
+    text = owoify(pog)
     await ctx.send(text)
 		
 

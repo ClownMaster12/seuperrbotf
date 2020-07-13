@@ -420,23 +420,10 @@ async def ghstatus(ctx):
         embed = discord.Embed(title=f"")
         embed.add_field(name="Github Status", value=f"`{j['status']['description']}`", inline=False)
         embed.add_field(name="API Status", value=f"`{k['components'][0]['status']}`".replace("operational", "Operational"), inline=False) 
-        embed.add_field(name="Incidents", value=f"`{m['incidents']}`".replace("[]", "None"), inline=False) 
+        embed.add_field(name="Incidents", value=f"`{m['incidents']['status']}`".replace("[]", "None"), inline=False) 
 
         await ctx.send(embed=embed)
 
-
-
-
-
-
-
-
-
-
-        
-
-
-        
       except Exception as e:
         embed = discord.Embed(title=f"Error: `{e}`")
         await m.edit(embed=embed)

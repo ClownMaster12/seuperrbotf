@@ -73,17 +73,7 @@ messages = joined = 0
 
 
 
-def get_prefix(client, message):
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-        
-    e = prefixes[str(message.guild.id)]
-   
-    return prefixes[str(message.guild.id)]
-
-client=discord.AutoShardedClient()
-
-client = commands.Bot(command_prefix=get_prefix, case_insensitive=True)
+client = commands.Bot(command_prefix='-', case_insensitive=True)
 client.remove_command('help')
 
 
@@ -284,63 +274,10 @@ async def owoify(ctx, *, text):
         await ctx.send(f"{text} {random.choice(faces)}")
 		
 
-@client.event
-async def on_guild_join(guild):
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-
-
-    prefixes[str(guild.id)] = "-"
-
-    with open("prefixes.json", "w") as f:
-        json.dump(prefixes, f, indent=4)
-
-@client.event
-async def on_guild_remove(guild):
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-
-
-    prefixes.pop(str(guild.id))
-
-    with open("prefixes.json", "w") as f:
-        json.dump(prefixes, f, indent=4)
 
 
 	
-	
-	
 
-@client.command(aliases=["setprefix"])
-async def changeprefix(ctx, prefix):
-  if ctx.author.id == 229016449593769984 or ctx.author.id == 286591003794604034 or commands.has_permissions(manage_messages=True):
-    try:
-        embed = discord.Embed(
-        title=f'Prefix was changed to `{prefix}` successfully.', description='' , colour=0x2f3136)
-
-        msg = await ctx.send(embed = embed)
-        with open("prefixes.json", "r") as f:
-            prefixes = json.load(f)
-
-
-        prefixes[str(ctx.guild.id)] = prefix
-
-        with open("prefixes.json", "w") as f:
-            json.dump(prefixes, f, indent=4)
-    except:
-        embed = discord.Embed(
-        title=f'There was a error changing the prefix. ', description='' , colour=0x2f3136)
-
-        msg = await ctx.send(embed = embed)
-@changeprefix.error
-async def changeprefix_error(ctx, error):
-    if isinstance(error, commands.CheckFailure):
-        embed = discord.Embed(
-        title='Sorry.', description='You need the `manage_messages` permission to use this command.' , colour=discord.Colour.red())
-
-
-        msg = await ctx.send(embed = embed)
-        await msg.add_reaction("❌")
     
 
 import psutil
@@ -527,23 +464,7 @@ async def chatbot(ctx,*,message):
                 await m.edit(embed = embed)
 			
 			
-    
-@client.event
-async def on_message(message):
-    with open("prefixes.json", "r") as f:
-        prefixes = json.load(f)
-        
-    e = prefixes[str(message.guild.id)]
-    if message.author.bot:
-        return
-    if client.user in message.mentions: 
-        embed = discord.Embed(
-        title='', description=f'Prefix: `{e}`' , colour=discord.Colour.blurple())
 
-        
-   
-        await message.channel.send(embed = embed)
-    await client.process_commands(message)
    
 @client.command()
 async def bug(ctx, *, something):
@@ -961,11 +882,6 @@ async def password(ctx, nbytes: int = 18):
         await ctx.send(embed=embed)
 
 
-@commands.is_owner()
-@client.command()
-async def prefixes(ctx):
-        file = open('prefixes.json', 'r')
-        await ctx.send(file=discord. File('prefixes.json'))
 
 
 
@@ -1383,7 +1299,6 @@ async def useful(ctx):
 
     embed.add_field(name="Ping", value=f"Shows the bot latency.", inline=False)
     embed.add_field(name="Stats", value=f"Show information about the bot.", inline=False)
-    embed.add_field(name="Setprefix", value=f"Changes the bots prefix.", inline=False)
     embed.add_field(name="Password", value=f"Generates a random password.", inline=False)
     embed.add_field(name="Dstatus", value=f"Shows the status of discord.", inline=False)
     embed.add_field(name="Ghstatus", value=f"Shows the status of github.", inline=False)
